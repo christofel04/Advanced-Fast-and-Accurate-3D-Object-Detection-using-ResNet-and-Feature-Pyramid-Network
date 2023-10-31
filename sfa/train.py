@@ -233,7 +233,7 @@ def main_worker(gpu_idx, configs):
                     #configs.device = "cpu"    
 
                     for idx in range(len(val_dataloader)):
-                        bev_map, labels, img_rgb, img_path = dataset.draw_img_with_label(idx)
+                        bev_map, labels, img_rgb, img_path = val_dataloader.draw_img_with_label(idx)
                         #print( 'Making Dataset SFA 3D Labelling Rosbag Data : ' + str( idx ))
                         #calib = Calibration(img_path.replace(".png", ".txt").replace("image_2", "calib"))
                         
