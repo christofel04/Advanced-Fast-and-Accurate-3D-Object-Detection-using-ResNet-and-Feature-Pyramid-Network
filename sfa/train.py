@@ -441,82 +441,89 @@ def validate(val_dataloader, model, configs , number_epoch = 0 , ground_truth_da
                                                                                                     bev_corners[ 3 ][ 1 ] ] 
                                                                                                     )                            
                 
-    
-    if ground_truth_dataset != None :
-        # Evaluating MAP of SFA 3D Model trains on All Rosbag Hyundai Dataset
-        
-        SFA_3D_Prediction_Bounding_Box_Dataset = pd.DataFrame( SFA_3D_Prediction_Bounding_Box_Dictionary )
-
-        SFA_3D_Ground_Truth_Bounding_Box_Dataset = ground_truth_dataset 
-
-        Object_Detection_Prediction_SFA_3D_Dataset_IOU_Dictionary = { "Object_Detection_Prediction_Index" : [] ,
-                                                                "Confidence_Score_SFA_3D_Dataset" : [] ,
-                                                                "Object_Detection_IOU" : [] }
-
-        for Object_Detection_Prediction_SFA_3D_Dataset_Index in sorted( list( SFA_3D_Prediction_Bounding_Box_Dataset.index ) ) :
-
-            Object_Detection_Prediction_SFA_3D_Dataset = SFA_3D_Prediction_Bounding_Box_Dataset.loc[ Object_Detection_Prediction_SFA_3D_Dataset_Index ]
-
-            list_of_IOU_Object_Detection_SFA_3D_Dataset = []
-
-            for _ , Object_Detection_in_Ground_Truth_SFA_3D_Dataset in SFA_3D_Ground_Truth_Bounding_Box_Dataset[ SFA_3D_Ground_Truth_Bounding_Box_Dataset[ "Image_Path"] == str( Object_Detection_Prediction_SFA_3D_Dataset[ "Image_Path" ])].iterrows() :
-
-                list_of_IOU_Object_Detection_SFA_3D_Dataset.append( bb_intersection_over_union( Object_Detection_Prediction_SFA_3D_Dataset[ "BEV_Corner" ] , 
-                                                                                            Object_Detection_in_Ground_Truth_SFA_3D_Dataset[ "BEV_Corner" ]))
-                
-            Object_Detection_Prediction_SFA_3D_Dataset_IOU_Dictionary[ "Object_Detection_Prediction_Index" ].append( Object_Detection_Prediction_SFA_3D_Dataset_Index )
-
-            Object_Detection_Prediction_SFA_3D_Dataset_IOU_Dictionary[ "Confidence_Score_SFA_3D_Dataset" ].append( Object_Detection_Prediction_SFA_3D_Dataset[ "Confidence_Score_Prediction" ])
-
-            Object_Detection_Prediction_SFA_3D_Dataset_IOU_Dictionary[ "Object_Detection_IOU" ].append( max( list_of_IOU_Object_Detection_SFA_3D_Dataset ))
-
-        Object_Detection_Prediction_SFA_3D_Dataset_IOU = pd.DataFrame( Object_Detection_Prediction_SFA_3D_Dataset_IOU_Dictionary )
-
-        #print( Object_Detection_Prediction_SFA_3D_Dataset_IOU.to_string() )
-
-        Object_Detection_Prediction_SFA_3D_Dataset_IOU = Object_Detection_Prediction_SFA_3D_Dataset_IOU.sort_values( "Confidence_Score_SFA_3D_Dataset" , ascending=False )
-
-        Object_Detection_Prediction_SFA_3D_Average_Precision_Dictionary = {}
-
-        for iou_threshold in range( 50 , 100 , 5 ):
-
-            IOU_Treshold_Minimum_Value = iou_threshold
-
-            IOU_Treshold_Minimum_Value = IOU_Treshold_Minimum_Value / 100 
-
-            Object_Detection_Prediction_SFA_3D_Dataset_IOU[ "SFA_3D_Dataset_Prediction_Result" ] = Object_Detection_Prediction_SFA_3D_Dataset_IOU[ "Object_Detection_IOU" ].apply( lambda row : 1 if row >= IOU_Treshold_Minimum_Value else 0 )
-
-            y_true = np.array( Object_Detection_Prediction_SFA_3D_Dataset_IOU[ "SFA_3D_Dataset_Prediction_Result"])
-            y_scores = np.array( Object_Detection_Prediction_SFA_3D_Dataset_IOU[ "Confidence_Score_SFA_3D_Dataset" ] )
-
-            #print( "SFA 3D Dataset Ground Truth is : " + str( y_true ))
-
-            #print( "SFA 3D Dataset Prediction is : " + str( y_scores ) )
+    try :
+        if ground_truth_dataset != None :
+            # Evaluating MAP of SFA 3D Model trains on All Rosbag Hyundai Dataset
             
-            Object_Detection_Prediction_SFA_3D_Average_Precision_Dictionary[ str( IOU_Treshold_Minimum_Value ) ] = average_precision_score(y_true, y_scores)
+            SFA_3D_Prediction_Bounding_Box_Dataset = pd.DataFrame( SFA_3D_Prediction_Bounding_Box_Dictionary )
 
-        print( "Average Precision of Object Detection SFA 3D Dataset is : " + str( Object_Detection_Prediction_SFA_3D_Average_Precision_Dictionary ) )
+            SFA_3D_Ground_Truth_Bounding_Box_Dataset = ground_truth_dataset 
 
-        print( "Average Precision Object Detection SFA 3D with IOU Treshold Minimul 0.50 , 0.55 , .. 0.95 is : " + str( np.array( [ Object_Detection_Prediction_SFA_3D_Average_Precision_Dictionary[ i ] for i in Object_Detection_Prediction_SFA_3D_Average_Precision_Dictionary.keys() ]).mean()))
+            Object_Detection_Prediction_SFA_3D_Dataset_IOU_Dictionary = { "Object_Detection_Prediction_Index" : [] ,
+                                                                    "Confidence_Score_SFA_3D_Dataset" : [] ,
+                                                                    "Object_Detection_IOU" : [] }
 
-        print( "Average IOU of Object Detection SFA 3D Is : " + str( Object_Detection_Prediction_SFA_3D_Dataset_IOU[ "Object_Detection_IOU" ].mean() ) )
+            for Object_Detection_Prediction_SFA_3D_Dataset_Index in sorted( list( SFA_3D_Prediction_Bounding_Box_Dataset.index ) ) :
 
-        #SFA_3D_Rosbag_Hyundai_Evaluation_Dictionary[ "SFA_3D_Rosbag_Hyundai_Model_Path" ].append( str( SFA_3D_Rosbag_Hyundai_Model_Path ) )
+                Object_Detection_Prediction_SFA_3D_Dataset = SFA_3D_Prediction_Bounding_Box_Dataset.loc[ Object_Detection_Prediction_SFA_3D_Dataset_Index ]
 
-        SFA_3D_Rosbag_Hyundai_Evaluation_Dictionary[ "SFA_3D_Rosbag_Average_Precision" ].append( Object_Detection_Prediction_SFA_3D_Average_Precision_Dictionary )
+                list_of_IOU_Object_Detection_SFA_3D_Dataset = []
 
-        SFA_3D_Rosbag_Hyundai_Evaluation_Dictionary[ "SFA_3D_Rosbag_Average_Precision_0.5_0.55_0.95" ].append( np.array( [ Object_Detection_Prediction_SFA_3D_Average_Precision_Dictionary[ i ] for i in Object_Detection_Prediction_SFA_3D_Average_Precision_Dictionary.keys() ]).mean() )
-        
-        SFA_3D_Rosbag_Hyundai_Evaluation_Dictionary[ "SFA_3D_Rosbag_Hyundai_Average_IOU" ].append( Object_Detection_Prediction_SFA_3D_Dataset_IOU[ "Object_Detection_IOU" ].mean() )
+                for _ , Object_Detection_in_Ground_Truth_SFA_3D_Dataset in SFA_3D_Ground_Truth_Bounding_Box_Dataset[ SFA_3D_Ground_Truth_Bounding_Box_Dataset[ "Image_Path"] == str( Object_Detection_Prediction_SFA_3D_Dataset[ "Image_Path" ])].iterrows() :
 
-        print( "-------------------------------------------------------------------")
+                    list_of_IOU_Object_Detection_SFA_3D_Dataset.append( bb_intersection_over_union( Object_Detection_Prediction_SFA_3D_Dataset[ "BEV_Corner" ] , 
+                                                                                                Object_Detection_in_Ground_Truth_SFA_3D_Dataset[ "BEV_Corner" ]))
+                    
+                Object_Detection_Prediction_SFA_3D_Dataset_IOU_Dictionary[ "Object_Detection_Prediction_Index" ].append( Object_Detection_Prediction_SFA_3D_Dataset_Index )
 
-        SFA_3D_Rosbag_Hyundai_Evaluation_Dataset = pd.DataFrame( SFA_3D_Rosbag_Hyundai_Evaluation_Dictionary )
+                Object_Detection_Prediction_SFA_3D_Dataset_IOU_Dictionary[ "Confidence_Score_SFA_3D_Dataset" ].append( Object_Detection_Prediction_SFA_3D_Dataset[ "Confidence_Score_Prediction" ])
 
-        SFA_3D_Rosbag_Hyundai_Evaluation_Dataset = SFA_3D_Rosbag_Hyundai_Evaluation_Dataset.sort_values( "SFA_3D_Rosbag_Average_Precision_0.5_0.55_0.95" , ascending= False )
+                Object_Detection_Prediction_SFA_3D_Dataset_IOU_Dictionary[ "Object_Detection_IOU" ].append( max( list_of_IOU_Object_Detection_SFA_3D_Dataset ))
 
-        export = SFA_3D_Rosbag_Hyundai_Evaluation_Dataset.to_csv( os.path.join( configs.checkpoints_dir , "SFA_3D_Rosbag_Hyundai_Evaluation_SFA_3D_Model_{}_Epoch_{}.csv".format( configs.saved_fn , number_epoch ) ) , index = False )
+            Object_Detection_Prediction_SFA_3D_Dataset_IOU = pd.DataFrame( Object_Detection_Prediction_SFA_3D_Dataset_IOU_Dictionary )
 
+            #print( Object_Detection_Prediction_SFA_3D_Dataset_IOU.to_string() )
+
+            Object_Detection_Prediction_SFA_3D_Dataset_IOU = Object_Detection_Prediction_SFA_3D_Dataset_IOU.sort_values( "Confidence_Score_SFA_3D_Dataset" , ascending=False )
+
+            Object_Detection_Prediction_SFA_3D_Average_Precision_Dictionary = {}
+
+            for iou_threshold in range( 50 , 100 , 5 ):
+
+                IOU_Treshold_Minimum_Value = iou_threshold
+
+                IOU_Treshold_Minimum_Value = IOU_Treshold_Minimum_Value / 100 
+
+                Object_Detection_Prediction_SFA_3D_Dataset_IOU[ "SFA_3D_Dataset_Prediction_Result" ] = Object_Detection_Prediction_SFA_3D_Dataset_IOU[ "Object_Detection_IOU" ].apply( lambda row : 1 if row >= IOU_Treshold_Minimum_Value else 0 )
+
+                y_true = np.array( Object_Detection_Prediction_SFA_3D_Dataset_IOU[ "SFA_3D_Dataset_Prediction_Result"])
+                y_scores = np.array( Object_Detection_Prediction_SFA_3D_Dataset_IOU[ "Confidence_Score_SFA_3D_Dataset" ] )
+
+                #print( "SFA 3D Dataset Ground Truth is : " + str( y_true ))
+
+                #print( "SFA 3D Dataset Prediction is : " + str( y_scores ) )
+                
+                Object_Detection_Prediction_SFA_3D_Average_Precision_Dictionary[ str( IOU_Treshold_Minimum_Value ) ] = average_precision_score(y_true, y_scores)
+
+            print( "Average Precision of Object Detection SFA 3D Dataset is : " + str( Object_Detection_Prediction_SFA_3D_Average_Precision_Dictionary ) )
+
+            print( "Average Precision Object Detection SFA 3D with IOU Treshold Minimul 0.50 , 0.55 , .. 0.95 is : " + str( np.array( [ Object_Detection_Prediction_SFA_3D_Average_Precision_Dictionary[ i ] for i in Object_Detection_Prediction_SFA_3D_Average_Precision_Dictionary.keys() ]).mean()))
+
+            print( "Average IOU of Object Detection SFA 3D Is : " + str( Object_Detection_Prediction_SFA_3D_Dataset_IOU[ "Object_Detection_IOU" ].mean() ) )
+
+            #SFA_3D_Rosbag_Hyundai_Evaluation_Dictionary[ "SFA_3D_Rosbag_Hyundai_Model_Path" ].append( str( SFA_3D_Rosbag_Hyundai_Model_Path ) )
+
+            SFA_3D_Rosbag_Hyundai_Evaluation_Dictionary[ "SFA_3D_Rosbag_Average_Precision" ].append( Object_Detection_Prediction_SFA_3D_Average_Precision_Dictionary )
+
+            SFA_3D_Rosbag_Hyundai_Evaluation_Dictionary[ "SFA_3D_Rosbag_Average_Precision_0.5_0.55_0.95" ].append( np.array( [ Object_Detection_Prediction_SFA_3D_Average_Precision_Dictionary[ i ] for i in Object_Detection_Prediction_SFA_3D_Average_Precision_Dictionary.keys() ]).mean() )
+            
+            SFA_3D_Rosbag_Hyundai_Evaluation_Dictionary[ "SFA_3D_Rosbag_Hyundai_Average_IOU" ].append( Object_Detection_Prediction_SFA_3D_Dataset_IOU[ "Object_Detection_IOU" ].mean() )
+
+            print( "-------------------------------------------------------------------")
+
+            SFA_3D_Rosbag_Hyundai_Evaluation_Dataset = pd.DataFrame( SFA_3D_Rosbag_Hyundai_Evaluation_Dictionary )
+
+            SFA_3D_Rosbag_Hyundai_Evaluation_Dataset = SFA_3D_Rosbag_Hyundai_Evaluation_Dataset.sort_values( "SFA_3D_Rosbag_Average_Precision_0.5_0.55_0.95" , ascending= False )
+
+            export = SFA_3D_Rosbag_Hyundai_Evaluation_Dataset.to_csv( os.path.join( configs.checkpoints_dir , "SFA_3D_Rosbag_Hyundai_Evaluation_SFA_3D_Model_{}_Epoch_{}.csv".format( configs.saved_fn , number_epoch ) ) , index = False )
+
+    except Exception as e :
+
+        print( "Cant make evaluation SFA 3D Model on Rosbag Hyundai Dataset...." )
+
+        print( "Error is : " + str( e ))
+
+        print( "----------------------------------------------------------" )
 
 
     return losses.avg
