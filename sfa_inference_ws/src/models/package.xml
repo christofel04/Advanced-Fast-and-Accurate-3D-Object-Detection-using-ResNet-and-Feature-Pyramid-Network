@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>models</name>
+  <version>0.0.0</version>
+  <description>The my_robot_common package</description>
+  <maintainer email="your@email.here">Your Name</maintainer>
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <exec_depend>rospy</exec_depend>
+
+  <export>
+  </export>
+</package>

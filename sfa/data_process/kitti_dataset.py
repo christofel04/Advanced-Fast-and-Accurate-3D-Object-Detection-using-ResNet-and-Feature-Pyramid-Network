@@ -1,9 +1,11 @@
 """
 # -*- coding: utf-8 -*-
 -----------------------------------------------------------------------------------
-# Author: Nguyen Mau Dung
-# DoC: 2020.08.17
-# email: nguyenmaudung93.kstn@gmail.com
+# Author: Goenawan Christofel Rio
+# DoC: 2023.03.17
+# AI & Analytics Consultant at Hyundai Company
+# AI & Robotics Researcher at Korea Advanced Institute of Science and Technology
+# email: christofel.goenawan@kaist.ac.kr
 -----------------------------------------------------------------------------------
 # Description: This script for the KITTI dataset
 """
@@ -51,9 +53,15 @@ class KittiDataset(Dataset):
         self.lidar_dir = os.path.join(self.dataset_dir, sub_folder, "velodyne")
         self.calib_dir = os.path.join(self.dataset_dir, sub_folder, "calib")
         self.label_dir = os.path.join(self.dataset_dir, sub_folder, "label_2")
+        print( 'Training SFA 3D Dataset Bounding Box Hyundai Race on Dataset : ' + str( self.dataset_dir ))
         split_txt_path = os.path.join(self.dataset_dir, 'ImageSets', '{}.txt'.format(mode))
         self.sample_id_list = [int(x.strip()) for x in open(split_txt_path).readlines()]
-
+        
+        self.is_Making_SFA_3D_Model_Without_Color = configs.is_Training_SFA_3D_Model_Without_Color#[int(x.strip()) for x in open(split_txt_path).readlines()]
+        
+        if self.is_Making_SFA_3D_Model_Without_Color == True :
+                print( "-------------------------\nTraining SFA 3D Model without Color\n------------------" )
+                        	
         if num_samples is not None:
             self.sample_id_list = self.sample_id_list[:num_samples]
         self.num_samples = len(self.sample_id_list)
@@ -63,17 +71,17 @@ class KittiDataset(Dataset):
 
     def __getitem__(self, index):
         if self.is_test:
-            return self.load_img_only(index)
+            return self.load_img_only(index , self.is_Making_SFA_3D_Model_Without_Color )
         else:
-            return self.load_img_with_targets(index)
+            return self.load_img_with_targets(index , self.is_Making_SFA_3D_Model_Without_Color )
 
-    def load_img_only(self, index):
+    def load_img_only(self, index , is_Training_SFA_3D_Model_Without_Color = False ):
         """Load only image for the testing phase"""
         sample_id = int(self.sample_id_list[index])
         img_path, img_rgb = self.get_image(sample_id)
         lidarData = self.get_lidar(sample_id)
         lidarData = get_filtered_lidar(lidarData, cnf.boundary)
-        bev_map = makeBEVMap(lidarData, cnf.boundary)
+        bev_map = makeBEVMap(lidarData, cnf.boundary , is_Training_SFA_3D_Model_Without_Color )
         bev_map = torch.from_numpy(bev_map)
 
         metadatas = {
@@ -82,7 +90,7 @@ class KittiDataset(Dataset):
 
         return metadatas, bev_map, img_rgb
 
-    def load_img_with_targets(self, index):
+    def load_img_with_targets(self, index , is_Training_SFA_3D_Model_Without_Color= False ):
         """Load images and targets for the training and validation phase"""
         sample_id = int(self.sample_id_list[index])
         img_path = os.path.join(self.image_dir, '{:06d}.png'.format(sample_id))
@@ -97,7 +105,7 @@ class KittiDataset(Dataset):
 
         lidarData, labels = get_filtered_lidar(lidarData, cnf.boundary, labels)
 
-        bev_map = makeBEVMap(lidarData, cnf.boundary)
+        bev_map = makeBEVMap(lidarData, cnf.boundary , self.is_Making_SFA_3D_Model_Without_Color )
         bev_map = torch.from_numpy(bev_map)
 
         hflipped = False
@@ -117,8 +125,12 @@ class KittiDataset(Dataset):
 
     def get_image(self, idx):
         img_path = os.path.join(self.image_dir, '{:06d}.png'.format(idx))
-        img = cv2.cvtColor(cv2.imread(img_path), cv2.COLOR_BGR2RGB)
-
+        try :
+        	img = cv2.cvtColor(cv2.imread(img_path), cv2.COLOR_BGR2RGB)
+        
+        except :
+        	img = cv2.cvtColor(cv2.imread( "/media/ofel04/eb36cbe5-b485-4b41-a943-aa0452f90da3/home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data_with_Hyundai_New_Race/training/image_2/000001.png" ), cv2.COLOR_BGR2RGB)	
+        
         return img_path, img
 
     def get_calib(self, idx):
@@ -138,7 +150,11 @@ class KittiDataset(Dataset):
             line = line.rstrip()
             line_parts = line.split(' ')
             obj_name = line_parts[0]  # 'Car', 'Pedestrian', ...
-            cat_id = int(cnf.CLASS_NAME_TO_ID[obj_name])
+            try :
+            	cat_id = int(cnf.CLASS_NAME_TO_ID[obj_name])
+            except :
+            	print( "There is no Car in 3D Labelling Result" )
+            	continue
             if cat_id <= -99:  # ignore Tram and Misc
                 continue
             truncated = int(float(line_parts[1]))  # truncated pixel ratio [0..1]
@@ -253,12 +269,13 @@ class KittiDataset(Dataset):
 
         return targets
 
-    def draw_img_with_label(self, index):
+    def draw_img_with_label(self, index , is_Making_SFA_3D_Model_Without_Color = False ):
         sample_id = int(self.sample_id_list[index])
         img_path, img_rgb = self.get_image(sample_id)
         lidarData = self.get_lidar(sample_id)
         calib = self.get_calib(sample_id)
-        labels, has_labels = self.get_label(sample_id)
+        labels , has_labels = self.get_label( sample_id )
+                
         if has_labels:
             labels[:, 1:] = transformation.camera_to_lidar_box(labels[:, 1:], calib.V2C, calib.R0, calib.P2)
 
@@ -266,38 +283,321 @@ class KittiDataset(Dataset):
             lidarData, labels[:, 1:] = self.lidar_aug(lidarData, labels[:, 1:])
 
         lidarData, labels = get_filtered_lidar(lidarData, cnf.boundary, labels)
-        bev_map = makeBEVMap(lidarData, cnf.boundary)
+        bev_map = makeBEVMap(lidarData, cnf.boundary , is_Making_SFA_3D_Model_Without_Color )
 
         return bev_map, labels, img_rgb, img_path
+    
+# bev image coordinates format
+def get_corners(x, y, w, l, yaw):
+    bev_corners = np.zeros((4, 2), dtype=np.float32)
+    cos_yaw = np.cos(yaw)
+    sin_yaw = np.sin(yaw)
+
+    
+    # front left
+    bev_corners[0, 0] = x - w / 2 * cos_yaw - l / 2 * sin_yaw
+    bev_corners[0, 1] = y - w / 2 * sin_yaw + l / 2 * cos_yaw
+
+    # rear left
+    bev_corners[1, 0] = x - w / 2 * cos_yaw + l / 2 * sin_yaw
+    bev_corners[1, 1] = y - w / 2 * sin_yaw - l / 2 * cos_yaw
+
+    # rear right
+    bev_corners[2, 0] = x + w / 2 * cos_yaw + l / 2 * sin_yaw
+    bev_corners[2, 1] = y + w / 2 * sin_yaw - l / 2 * cos_yaw
+
+    # front right
+    bev_corners[3, 0] = x + w / 2 * cos_yaw - l / 2 * sin_yaw
+    bev_corners[3, 1] = y + w / 2 * sin_yaw + l / 2 * cos_yaw
+
+    
+    """
+    bev_corners[ 0 ][ 0 ] = x - w/ 2  
+    bev_corners[ 0 ][ 1 ] = y - l/2
+
+    bev_corners[ 1 ][ 0 ] = x + w/2
+    bev_corners[ 1 ][ 1 ] = y + l/2
+    """
+    return bev_corners
 
 
 if __name__ == '__main__':
     from easydict import EasyDict as edict
     from data_process.transformation import OneOf, Random_Scaling, Random_Rotation, lidar_to_camera_box
     from utils.visualization_utils import merge_rgb_to_bev, show_rgb_image_with_boxes
+    
+    import argparse
+    
+    parser = argparse.ArgumentParser(description='The Implementation using PyTorch')
+    
+    parser.add_argument('--dataset_dir', type=str, default= os.path.join('../../', 'dataset', 'kitti'),
+                        help='Dataset for SFA 3D Dataset Bounding Box Rosebag Hyundai')
+    parser.add_argument('--is_Dataset_SFA_3D_Predicted_Bounding_Box', type=str, default= "/home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data/",
+                        help='Is Dataset SFA 3D Bounding Box Hyundai Rosebag Predicted Bounding Box or Not')
+                        
+    parser.add_argument('--is_Making_Video_SFA_3D_Dataset', type=bool, default= "/home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data/",
+                        help='Is Making Video SFA 3D Dataset Rosbag Hyundai or Not')
+                        
+    
+                                          
 
-    configs = edict()
+    #configs = edict()
+    configs = edict(vars(parser.parse_args()))
     configs.distributed = False  # For testing
     configs.pin_memory = False
     configs.num_samples = None
-    configs.input_size = (608, 608)
-    configs.hm_size = (152, 152)
+    configs.input_size = (800, 800)
+    configs.hm_size = (200, 200)
     configs.max_objects = 50
     configs.num_classes = 3
-    configs.output_width = 608
+    configs.output_width = 800
+    
+    if configs.dataset_dir == None :
 
-    configs.dataset_dir = os.path.join('../../', 'dataset', 'kitti')
-    # lidar_aug = OneOf([
-    #     Random_Rotation(limit_angle=np.pi / 4, p=1.),
-    #     Random_Scaling(scaling_range=(0.95, 1.05), p=1.),
-    # ], p=1.)
+        configs.dataset_dir = os.path.join('../../', 'dataset', 'kitti')
+        # lidar_aug = OneOf([
+        #     Random_Rotation(limit_angle=np.pi / 4, p=1.),
+        #     Random_Scaling(scaling_range=(0.95, 1.05), p=1.),
+        # ], p=1.)
+
     lidar_aug = None
+    
+    
 
-    dataset = KittiDataset(configs, mode='val', lidar_aug=lidar_aug, hflip_prob=0., num_samples=configs.num_samples)
+    configs.is_Dataset_SFA_3D_Predicted_Bounding_Box = False 
+
+    configs.is_Making_Video_SFA_3D_Dataset = False
+    
+    configs.is_Training_SFA_3D_Model_Without_Color = False
+
+    if configs.is_Dataset_SFA_3D_Predicted_Bounding_Box == True :
+        dataset = KittiDataset(configs, mode='test', lidar_aug=lidar_aug, hflip_prob=0., num_samples=configs.num_samples)
+
+        print('\n\nPress n to see the next sample >>> Press Esc to quit...')
+
+        Name_File_of_Prediction_and_Ground_Truth_Output_Files = "Output_" + "Ground_Truth" + "Ground_Truth_Dataset_SFA_3D_from_Bag.txt"
+
+        if os.path.exists( Name_File_of_Prediction_and_Ground_Truth_Output_Files ):
+
+            os.system( "sudo rm " + str( Name_File_of_Prediction_and_Ground_Truth_Output_Files ))
+
+            os.system( "sudo touch " + str( Name_File_of_Prediction_and_Ground_Truth_Output_Files ) )
+
+        f = open( "Output_Test_True_Detection_Dataset_SFA_3D_from_Bag.txt" , "a+" )
+
+        #print( 'meta', metadatas )
+
+        for idx in range(len(dataset)):
+            bev_map, labels, img_rgb, img_path = dataset.draw_img_with_label(idx , self.is_Making_SFA_3D_Model_Without_Color)
+            print( 'Making Dataset SFA 3D Labelling Rosbag Data : ' + str( idx ))
+            calib = Calibration(img_path.replace(".png", ".txt").replace("image_2", "calib"))
+            bev_map = (bev_map.transpose(1, 2, 0) * 255).astype(np.uint8)
+            bev_map = cv2.resize(bev_map, (cnf.BEV_HEIGHT, cnf.BEV_WIDTH))
+
+            for box_idx, (cls_id, x, y, z, h, w, l, yaw) in enumerate(labels):
+                # Draw rotated box
+                yaw = -yaw
+                #print( "Length of the Vehicle form Autonomous Vehicle is : " + str( x ))
+                #print( "Height of the Vehicle from Autonomous Vehicle is : " + str( y ))
+                #y = -y
+                y1 = int((x - cnf.boundary['minX']) / cnf.DISCRETIZATION)
+                x1 = int((y - cnf.boundary['minY']) / cnf.DISCRETIZATION)
+                #x1 = x1 + cnf.BEV_WIDTH/2   
+
+                #print( "Image Coordinate of Vehicle in Bird Eye View Image is : " + str( x1 ) )
+
+                #print( "Image Coordinate Y of Vehicle in Bird Eye View Image is : " + str( y1 ) )
+
+                
+                w1 = int(w / cnf.DISCRETIZATION)
+                l1 = int(l / cnf.DISCRETIZATION)
+
+
+                print(cnf.boundary['minX'])
+                print(cnf.boundary['minY'])
+                print(cnf.DISCRETIZATION)
+                print(w1)
+                print(l1)
+                print(w)
+                print(l)
+
+                bev_corners = get_corners(x, y, w, l, yaw)
+
+                #bev_corners = bev_corners + 604
+
+                #f.write( "{} {} {} {} {}\n".format( img_path  ,  bev_corners[0][0] , bev_corners[ 0 ][ 1 ] , bev_corners[ 1 ][ 0 ] , bev_corners[ 1 ][ 1 ]) )
+
+                drawRotatedBox(img_path, bev_map, x1, y1, w1, l1, yaw, cnf.colors[int(cls_id)] , writing_mode="Ground_Truth")
+
+            #f.close()
+            # Rotate the bev_map
+            """
+            bev_map = cv2.rotate(bev_map, cv2.ROTATE_180)
+            cv2.imshow('bev_map', bev_map)
+            """
+            '''
+            labels[:, 1:] = lidar_to_camera_box(labels[:, 1:], calib.V2C, calib.R0, calib.P2)
+            img_rgb = cv2.cvtColor(img_rgb, cv2.COLOR_RGB2BGR)
+            img_rgb = show_rgb_image_with_boxes(img_rgb, labels, calib)
+
+            out_img = merge_rgb_to_bev(img_rgb, bev_map, output_width=configs.output_width)
+            cv2.imshow('bev_map', out_img)
+            '''
+            #if cv2.waitKey(0) & 0xff == 27:
+            #    break
+
+
+    if configs.is_Making_Video_SFA_3D_Dataset == True :
+
+        import cv2
+        import os
+
+        #image_folder = '.'
+        video_name = 'Output_SFA_3D_Dataset_Video.mp4'
+
+        #frame = images[ 0 ] #cv2.imread(os.path.join(image_folder, images[0]))
+
+        width = configs.input_size[ 0 ]
+        height = configs.input_size[ 1 ]
+        #height, width, layers = frame.shape
+
+        fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+
+        video = cv2.VideoWriter(video_name, fourcc , 10 , (width,height))
+
+        #for image in images:
+        #    video.write(cv2.imread(os.path.join(image_folder, image)))
+
+        #cv2.destroyAllWindows()
+        #video.release()
+
+        #images = [img for img in os.listdir(image_folder) if img.endswith(".png")]
+
+        print( "Making Video SFA 3D Dataset..." )
+
+        dataset = KittiDataset(configs, mode='train', lidar_aug=lidar_aug, hflip_prob=0., num_samples=configs.num_samples)
+
+        list_of_SFA_3D_Dataset_Image_Ground_Truth = []
+        
+        #print('\n\nPress n to see the next sample >>> Press Esc to quit...')
+
+        #Name_File_of_Prediction_and_Ground_Truth_Output_Files = "Output_" + "Ground_Truth" + "Ground_Truth_Dataset_SFA_3D_from_Bag.txt"
+
+        """
+        if os.path.exists( Name_File_of_Prediction_and_Ground_Truth_Output_Files ):
+
+            os.system( "sudo rm " + str( Name_File_of_Prediction_and_Ground_Truth_Output_Files ))
+
+            os.system( "sudo touch " + str( Name_File_of_Prediction_and_Ground_Truth_Output_Files ) )
+
+        f = open( "Output_Test_True_Detection_Dataset_SFA_3D_from_Bag.txt" , "a+" )
+
+        """#print( 'meta', metadatas )
+
+        for idx in range(len(dataset)):
+            bev_map, labels, img_rgb, img_path = dataset.draw_img_with_label(idx)
+            #print( 'Making Dataset SFA 3D Labelling Rosbag Data : ' + str( idx ))
+            calib = Calibration(img_path.replace(".png", ".txt").replace("image_2", "calib"))
+            bev_map = (bev_map.transpose(1, 2, 0) * 255).astype(np.uint8)
+            bev_map = cv2.resize(bev_map, (cnf.BEV_HEIGHT, cnf.BEV_WIDTH))
+
+            for box_idx, (cls_id, x, y, z, h, w, l, yaw) in enumerate(labels):
+                # Draw rotated box
+                yaw = -yaw
+                #print( "Length of the Vehicle form Autonomous Vehicle is : " + str( x ))
+                #print( "Height of the Vehicle from Autonomous Vehicle is : " + str( y ))
+                #y = -y
+                y1 = int((x - cnf.boundary['minX']) / cnf.DISCRETIZATION)
+                x1 = int((y - cnf.boundary['minY']) / cnf.DISCRETIZATION)
+                #x1 = x1 + cnf.BEV_WIDTH/2   
+
+                #print( "Image Coordinate of Vehicle in Bird Eye View Image is : " + str( x1 ) )
+
+                #print( "Image Coordinate Y of Vehicle in Bird Eye View Image is : " + str( y1 ) )
+
+                
+                w1 = int(w / cnf.DISCRETIZATION)
+                l1 = int(l / cnf.DISCRETIZATION)
+
+
+                #print(cnf.boundary['minX'])
+                #print(cnf.boundary['minY'])
+                #print(cnf.DISCRETIZATION)
+                #print(w1)
+                #print(l1)
+                #print(w)
+                #print(l)
+
+                bev_corners = get_corners(x, y, w, l, yaw)
+
+                #bev_corners = bev_corners + 604
+
+                #f.write( "{} {} {} {} {}\n".format( img_path  ,  bev_corners[0][0] , bev_corners[ 0 ][ 1 ] , bev_corners[ 1 ][ 0 ] , bev_corners[ 1 ][ 1 ]) )
+
+                drawRotatedBox(img_path, bev_map, x1, y1, w1, l1, yaw, cnf.colors[int(cls_id)] , writing_mode="Ground_Truth")
+
+            #f.close()
+            # Rotate the bev_map
+            
+            bev_map = cv2.rotate(bev_map, cv2.ROTATE_180)
+            
+            #list_of_SFA_3D_Dataset_Image_Ground_Truth.append( bev_map )
+
+            video.write( bev_map )
+
+            if idx >= 10000 :
+
+                break
+            """
+            cv2.imshow('bev_map', bev_map)
+            """
+            '''
+            labels[:, 1:] = lidar_to_camera_box(labels[:, 1:], calib.V2C, calib.R0, calib.P2)
+            img_rgb = cv2.cvtColor(img_rgb, cv2.COLOR_RGB2BGR)
+            img_rgb = show_rgb_image_with_boxes(img_rgb, labels, calib)
+
+            out_img = merge_rgb_to_bev(img_rgb, bev_map, output_width=configs.output_width)
+            cv2.imshow('bev_map', out_img)
+            '''
+            #if cv2.waitKey(0) & 0xff == 27:
+            #    break
+        
+        """
+        import cv2
+        import os
+
+        image_folder = '.'
+        video_name = 'Output_SFA_3D_Dataset_Video.mp4'
+
+        #images = [img for img in os.listdir(image_folder) if img.endswith(".png")]
+        images = list_of_SFA_3D_Dataset_Image_Ground_Truth
+        frame = images[ 0 ] #cv2.imread(os.path.join(image_folder, images[0]))
+        height, width, layers = frame.shape
+
+        fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+
+        video = cv2.VideoWriter(video_name, fourcc , 4 , (width,height))
+
+        for image in images:
+            video.write(cv2.imread(os.path.join(image_folder, image)))
+        """
+        cv2.destroyAllWindows()
+        video.release()
+
+
+    
+    
+    dataset = KittiDataset(configs, mode='train', lidar_aug=lidar_aug, hflip_prob=0., num_samples=configs.num_samples)
 
     print('\n\nPress n to see the next sample >>> Press Esc to quit...')
+
+    #f = open( "Output_Train_Dataset_SFA_3D_from_Bag.txt" , "a+" )
+
+    DATASET_DIR = "/media/ofel04/eb36cbe5-b485-4b41-a943-aa0452f90da3/home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data_with_Hyundai_New_Race/"##print( 'meta', metadatas )
+
     for idx in range(len(dataset)):
         bev_map, labels, img_rgb, img_path = dataset.draw_img_with_label(idx)
+        print( 'Make SFA 3D Dataset Hyundai Rosebag Number : ' + str( idx ) + "\n" + "3D Dataset Labelling Number " + str( open( os.path.join( str( configs.dataset_dir ) , "ImageSets" , "train.txt" )).readlines()[ int( idx ) ] ))
         calib = Calibration(img_path.replace(".png", ".txt").replace("image_2", "calib"))
         bev_map = (bev_map.transpose(1, 2, 0) * 255).astype(np.uint8)
         bev_map = cv2.resize(bev_map, (cnf.BEV_HEIGHT, cnf.BEV_WIDTH))
@@ -305,21 +605,47 @@ if __name__ == '__main__':
         for box_idx, (cls_id, x, y, z, h, w, l, yaw) in enumerate(labels):
             # Draw rotated box
             yaw = -yaw
+            #print( "Length of the Vehicle form Autonomous Vehicle is : " + str( x ))
+            #print( "Height of the Vehicle from Autonomous Vehicle is : " + str( y ))
+            #y = -y
             y1 = int((x - cnf.boundary['minX']) / cnf.DISCRETIZATION)
             x1 = int((y - cnf.boundary['minY']) / cnf.DISCRETIZATION)
+            #x1 = x1 + cnf.BEV_WIDTH/2   
+
+            #print( "Image Coordinate of Vehicle in Bird Eye View Image is : " + str( x1 ) )
+
+            #print( "Image Coordinate Y of Vehicle in Bird Eye View Image is : " + str( y1 ) )
+
+            
             w1 = int(w / cnf.DISCRETIZATION)
             l1 = int(l / cnf.DISCRETIZATION)
 
-            drawRotatedBox(bev_map, x1, y1, w1, l1, yaw, cnf.colors[int(cls_id)])
+
+            #print(cnf.boundary['minX'])
+            #print(cnf.boundary['minY'])
+            #print(cnf.DISCRETIZATION)
+            #print(w1)
+            #print(l1)
+            #print(w)
+            #print(l)
+
+            bev_corners = get_corners(x, y, w, l, yaw)
+
+            #f.write( "{} {} {} {} {}\n".format( img_path  ,  bev_corners[0][0] , bev_corners[ 0 ][ 1 ] , bev_corners[ 1 ][ 0 ] , bev_corners[ 1 ][ 1 ]) )
+
+            drawRotatedBox( img_path , bev_map, x1, y1, w1, l1, yaw, cnf.colors[int(cls_id)] , writing_mode="Ground_Truth")
+
+        #f.close()
         # Rotate the bev_map
         bev_map = cv2.rotate(bev_map, cv2.ROTATE_180)
-
+        cv2.imshow('bev_map', bev_map)
+        '''
         labels[:, 1:] = lidar_to_camera_box(labels[:, 1:], calib.V2C, calib.R0, calib.P2)
         img_rgb = cv2.cvtColor(img_rgb, cv2.COLOR_RGB2BGR)
         img_rgb = show_rgb_image_with_boxes(img_rgb, labels, calib)
 
         out_img = merge_rgb_to_bev(img_rgb, bev_map, output_width=configs.output_width)
         cv2.imshow('bev_map', out_img)
-
+        '''
         if cv2.waitKey(0) & 0xff == 27:
             break

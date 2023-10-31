@@ -1,9 +1,11 @@
 """
 # -*- coding: utf-8 -*-
 -----------------------------------------------------------------------------------
-# Author: Nguyen Mau Dung
+# Author: Goenawan Christofel Rio
 # DoC: 2020.08.09
-# email: nguyenmaudung93.kstn@gmail.com
+# AI & Analytics Consultant at Hyundai Company
+# AI & Robotics Researcher at Korea Advanced Institute of Science and Technology
+# email: christofel.goenawan@kaist.ac.kr
 -----------------------------------------------------------------------------------
 # Description: utils functions that use for training process
 """
@@ -91,9 +93,9 @@ def get_saved_state(model, optimizer, lr_scheduler, epoch, configs):
     return model_state_dict, utils_state_dict
 
 
-def save_checkpoint(checkpoints_dir, saved_fn, model_state_dict, utils_state_dict, epoch):
+def save_checkpoint(checkpoints_dir, saved_fn, model_state_dict, utils_state_dict, epoch, loss):
     """Save checkpoint every epoch only is best model or after every checkpoint_freq epoch"""
-    model_save_path = os.path.join(checkpoints_dir, 'Model_{}_epoch_{}.pth'.format(saved_fn, epoch))
+    model_save_path = os.path.join(checkpoints_dir, 'Model_{}_epoch_{}.pth'.format(saved_fn, epoch) + 'Loss_' + str(loss) )
     utils_save_path = os.path.join(checkpoints_dir, 'Utils_{}_epoch_{}.pth'.format(saved_fn, epoch))
 
     torch.save(model_state_dict, model_save_path)

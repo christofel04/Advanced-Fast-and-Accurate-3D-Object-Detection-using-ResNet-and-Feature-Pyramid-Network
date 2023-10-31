@@ -1,9 +1,11 @@
 """
 # -*- coding: utf-8 -*-
 -----------------------------------------------------------------------------------
-# Author: Nguyen Mau Dung
-# DoC: 2020.08.17
-# email: nguyenmaudung93.kstn@gmail.com
+# Author: Goenawan Christofel Rio
+# DoC: 2023.03.17
+# AI & Analytics Consultant at Hyundai Company
+# AI & Robotics Researcher at Korea Advanced Institute of Science and Technology
+# email: christofel.goenawan@kaist.ac.kr
 -----------------------------------------------------------------------------------
 # Description: This script for training
 
@@ -15,6 +17,8 @@ import sys
 import random
 import os
 import warnings
+
+import pandas as pd
 
 warnings.filterwarnings("ignore", category=UserWarning)
 
@@ -39,6 +43,56 @@ from utils.misc import AverageMeter, ProgressMeter
 from utils.logger import Logger
 from config.train_config import parse_train_configs
 from losses.losses import Compute_Loss
+
+# Package for evaluating MAP SFA 3D Rosbag Hyundai Model
+
+from utils.misc import make_folder, time_synchronized
+from utils.evaluation_utils import decode, post_processing, draw_predictions, convert_det_to_real_values
+from utils.torch_utils import _sigmoid
+import config.kitti_config as cnf
+
+from sklearn.metrics import average_precision_score
+from shapely.geometry import Polygon
+
+# bev image coordinates format
+def get_corners(x, y, w, l, yaw):
+    bev_corners = np.zeros((4, 2), dtype=np.float32)
+    cos_yaw = np.cos(yaw)
+    sin_yaw = np.sin(yaw)
+    # front left
+    bev_corners[0, 0] = x - w / 2 * cos_yaw - l / 2 * sin_yaw
+    bev_corners[0, 1] = y - w / 2 * sin_yaw + l / 2 * cos_yaw
+
+    # rear left
+    bev_corners[1, 0] = x - w / 2 * cos_yaw + l / 2 * sin_yaw
+    bev_corners[1, 1] = y - w / 2 * sin_yaw - l / 2 * cos_yaw
+
+    # rear right
+    bev_corners[2, 0] = x + w / 2 * cos_yaw + l / 2 * sin_yaw
+    bev_corners[2, 1] = y + w / 2 * sin_yaw - l / 2 * cos_yaw
+
+    # front right
+    bev_corners[3, 0] = x + w / 2 * cos_yaw - l / 2 * sin_yaw
+    bev_corners[3, 1] = y + w / 2 * sin_yaw + l / 2 * cos_yaw
+
+    return bev_corners
+
+
+
+def bb_intersection_over_union(boxA, boxB):
+    
+
+    polygon = Polygon([(boxA[ 0 ], boxA[ 1 ]), (boxA[ 2 ], boxA[ 3 ]), (boxA[ 4 ], boxA[ 5 ]), (boxA[ 6 ], boxA[ 7 ] ) ] )
+    other_polygon = Polygon([(boxB[ 0 ], boxB[ 1 ]), (boxB[ 2 ], boxB[ 3 ]), (boxB[ 4 ], boxB[ 5 ]), ( boxB[ 6 ], boxB[ 7 ])])
+    intersection = polygon.intersection(other_polygon)
+    #print(intersection.area)
+
+    Area_of_Union_2_Bounding_Box = polygon.area + other_polygon.area - intersection.area
+
+    iou = intersection.area / Area_of_Union_2_Bounding_Box
+
+    # return the intersection over union value
+    return iou
 
 
 def main():
@@ -147,6 +201,8 @@ def main_worker(gpu_idx, configs):
         val_loss = validate(val_dataloader, model, configs)
         print('val_loss: {:.4e}'.format(val_loss))
         return
+    
+    Rosbag_Hyundai_Dataset_Ground_Truth_DF = None
 
     for epoch in range(configs.start_epoch, configs.num_epochs + 1):
         if logger is not None:
@@ -158,11 +214,68 @@ def main_worker(gpu_idx, configs):
         if configs.distributed:
             train_sampler.set_epoch(epoch)
         # train for one epoch
-        train_one_epoch(train_dataloader, model, optimizer, lr_scheduler, epoch, configs, logger, tb_writer)
+        loss = train_one_epoch(train_dataloader, model, optimizer, lr_scheduler, epoch, configs, logger, tb_writer)
         if (not configs.no_val) and (epoch % configs.checkpoint_freq == 0):
             val_dataloader = create_val_dataloader(configs)
             print('number of batches in val_dataloader: {}'.format(len(val_dataloader)))
-            val_loss = validate(val_dataloader, model, configs)
+
+            # Make ground truth Rosbag Hyundai Dataset
+            if Rosbag_Hyundai_Dataset_Ground_Truth_DF == None :
+                    
+                    SFA_3D_Ground_Truth_Bounding_Box_Dictionary = { "Image_Path" : [] ,
+                                                   "Confidence_Score_Prediction" : [] ,
+                                                   "BEV_Corner" : [] }
+
+                    print( "Creating Ground Truth SFA 3D Rosbag Hyundai Dataset" )
+
+                    #configs.no_cuda= True
+                    
+                    #configs.device = "cpu"    
+
+                    for idx in range(len(val_dataloader)):
+                        bev_map, labels, img_rgb, img_path = dataset.draw_img_with_label(idx)
+                        #print( 'Making Dataset SFA 3D Labelling Rosbag Data : ' + str( idx ))
+                        #calib = Calibration(img_path.replace(".png", ".txt").replace("image_2", "calib"))
+                        
+
+                        for box_idx, (cls_id, x, y, z, h, w, l, yaw) in enumerate(labels):
+                            # Draw rotated box
+                            yaw = -yaw
+                    
+                            y1 = int((x - cnf.boundary['minX']) / cnf.DISCRETIZATION)
+                            x1 = int((y - cnf.boundary['minY']) / cnf.DISCRETIZATION)
+
+                            
+                            w1 = int(w / cnf.DISCRETIZATION)
+                            l1 = int(l / cnf.DISCRETIZATION)
+
+
+                            
+
+                            bev_corners = get_corners(x1, y1, w1, l1, yaw)
+                            
+                            bev_corners = bev_corners.astype( int )            
+
+                            
+                            SFA_3D_Ground_Truth_Bounding_Box_Dictionary[ "Image_Path" ].append( img_path )
+
+
+                            SFA_3D_Ground_Truth_Bounding_Box_Dictionary[ "Confidence_Score_Prediction" ].append( 100 )
+
+                            SFA_3D_Ground_Truth_Bounding_Box_Dictionary[ "BEV_Corner" ].append( [ bev_corners[ 0 ][ 0 ] ,
+                                                                                                bev_corners[ 0 ][ 1 ] ,
+                                                                                                bev_corners[ 1 ][ 0 ] ,
+                                                                                                bev_corners[ 1 ][ 1 ] ,
+                                                                                                bev_corners[ 2 ][ 0 ] ,
+                                                                                                bev_corners[ 2 ][ 1 ] ,
+                                                                                                bev_corners[ 3 ][ 0 ] ,
+                                                                                                bev_corners[ 3 ][ 1 ] ] 
+                                                                                                )
+                                                                                                
+
+                    Rosbag_Hyundai_Dataset_Ground_Truth_DF = pd.DataFrame( SFA_3D_Ground_Truth_Bounding_Box_Dictionary )
+            
+            val_loss = validate(val_dataloader, model, configs , number_epoch= epoch , ground_truth_dataset = Rosbag_Hyundai_Dataset_Ground_Truth_DF )
             print('val_loss: {:.4e}'.format(val_loss))
             if tb_writer is not None:
                 tb_writer.add_scalar('Val_loss', val_loss, epoch)
@@ -170,7 +283,7 @@ def main_worker(gpu_idx, configs):
         # Save checkpoint
         if configs.is_master_node and ((epoch % configs.checkpoint_freq) == 0):
             model_state_dict, utils_state_dict = get_saved_state(model, optimizer, lr_scheduler, epoch, configs)
-            save_checkpoint(configs.checkpoints_dir, configs.saved_fn, model_state_dict, utils_state_dict, epoch)
+            save_checkpoint(configs.checkpoints_dir, configs.saved_fn, model_state_dict, utils_state_dict, epoch, loss)
 
         if not configs.step_lr_in_epoch:
             lr_scheduler.step()
@@ -245,13 +358,23 @@ def train_one_epoch(train_dataloader, model, optimizer, lr_scheduler, epoch, con
                 logger.info(progress.get_message(batch_idx))
 
         start_time = time.time()
+    return reduced_loss
 
 
-def validate(val_dataloader, model, configs):
+def validate(val_dataloader, model, configs , number_epoch = 0 , ground_truth_dataset = None ):
     losses = AverageMeter('Loss', ':.4e')
     criterion = Compute_Loss(device=configs.device)
     # switch to train mode
     model.eval()
+
+    SFA_3D_Prediction_Bounding_Box_Dictionary = { "Image_Path" : [] ,
+                                                   "Confidence_Score_Prediction" : [] ,
+                                                   "BEV_Corner" : [] }
+
+    SFA_3D_Rosbag_Hyundai_Evaluation_Dictionary = { "SFA_3D_Rosbag_Average_Precision" : [] ,
+                                                   "SFA_3D_Rosbag_Average_Precision_0.5_0.55_0.95" : [] ,
+                                                   "SFA_3D_Rosbag_Hyundai_Average_IOU" : [] }
+    
     with torch.no_grad():
         for batch_idx, batch_data in enumerate(tqdm(val_dataloader)):
             metadatas, imgs, targets = batch_data
@@ -270,6 +393,131 @@ def validate(val_dataloader, model, configs):
             else:
                 reduced_loss = total_loss.data
             losses.update(to_python_float(reduced_loss), batch_size)
+
+            if ground_truth_dataset != None :
+                # Evaluate MAP SFA 3D Model trains on all Rosbag Hyundai Dataset
+
+                outputs['hm_cen'] = _sigmoid(outputs['hm_cen'])
+                outputs['cen_offset'] = _sigmoid(outputs['cen_offset'])
+                # detections size (batch_size, K, 10)
+                detections = decode(outputs['hm_cen'], outputs['cen_offset'], outputs['direction'], outputs['z_coor'],
+                                    outputs['dim'], K=configs.K)
+                detections = detections.cpu().numpy().astype(np.float32)
+                detections = post_processing(detections, configs.num_classes, configs.down_ratio, configs.peak_thresh)
+                t2 = time_synchronized()
+
+                list_of_detections = detections.copy()
+
+                for LiDAR_Point_Detected in range( len( list_of_detections ) ) : 
+
+
+
+                    detections = list_of_detections[ LiDAR_Point_Detected ]  # only first batch
+
+                    img_path = metadatas['img_path'][ LiDAR_Point_Detected ]
+
+                    for j in range(configs.num_classes):
+                        if len(detections[j]) > 0:
+
+                            i = 0
+                            for det in detections[j]:
+
+                                i = i + 1
+                                # (scores-0:1, x-1:2, y-2:3, z-3:4, dim-4:7, yaw-7:8)
+                                _score, _x, _y, _z, _h, _w, _l, _yaw = det
+                                bev_corners = get_corners(_x, _y, _w, _l, _yaw)
+
+                                SFA_3D_Prediction_Bounding_Box_Dictionary[ "Image_Path" ].append( img_path )
+
+                                SFA_3D_Prediction_Bounding_Box_Dictionary[ "Confidence_Score_Prediction" ].append( float( _score ) )
+
+                                SFA_3D_Prediction_Bounding_Box_Dictionary[ "BEV_Corner" ].append( [ bev_corners[ 0 ][ 0 ] ,
+                                                                                                    bev_corners[ 0 ][ 1 ] ,
+                                                                                                    bev_corners[ 1 ][ 0 ] ,
+                                                                                                    bev_corners[ 1 ][ 1 ] ,
+                                                                                                    bev_corners[ 2 ][ 0 ] ,
+                                                                                                    bev_corners[ 2 ][ 1 ] ,
+                                                                                                    bev_corners[ 3 ][ 0 ] ,
+                                                                                                    bev_corners[ 3 ][ 1 ] ] 
+                                                                                                    )                            
+                
+    
+    if ground_truth_dataset != None :
+        # Evaluating MAP of SFA 3D Model trains on All Rosbag Hyundai Dataset
+        
+        SFA_3D_Prediction_Bounding_Box_Dataset = pd.DataFrame( SFA_3D_Prediction_Bounding_Box_Dictionary )
+
+        SFA_3D_Ground_Truth_Bounding_Box_Dataset = ground_truth_dataset 
+
+        Object_Detection_Prediction_SFA_3D_Dataset_IOU_Dictionary = { "Object_Detection_Prediction_Index" : [] ,
+                                                                "Confidence_Score_SFA_3D_Dataset" : [] ,
+                                                                "Object_Detection_IOU" : [] }
+
+        for Object_Detection_Prediction_SFA_3D_Dataset_Index in sorted( list( SFA_3D_Prediction_Bounding_Box_Dataset.index ) ) :
+
+            Object_Detection_Prediction_SFA_3D_Dataset = SFA_3D_Prediction_Bounding_Box_Dataset.loc[ Object_Detection_Prediction_SFA_3D_Dataset_Index ]
+
+            list_of_IOU_Object_Detection_SFA_3D_Dataset = []
+
+            for _ , Object_Detection_in_Ground_Truth_SFA_3D_Dataset in SFA_3D_Ground_Truth_Bounding_Box_Dataset[ SFA_3D_Ground_Truth_Bounding_Box_Dataset[ "Image_Path"] == str( Object_Detection_Prediction_SFA_3D_Dataset[ "Image_Path" ])].iterrows() :
+
+                list_of_IOU_Object_Detection_SFA_3D_Dataset.append( bb_intersection_over_union( Object_Detection_Prediction_SFA_3D_Dataset[ "BEV_Corner" ] , 
+                                                                                            Object_Detection_in_Ground_Truth_SFA_3D_Dataset[ "BEV_Corner" ]))
+                
+            Object_Detection_Prediction_SFA_3D_Dataset_IOU_Dictionary[ "Object_Detection_Prediction_Index" ].append( Object_Detection_Prediction_SFA_3D_Dataset_Index )
+
+            Object_Detection_Prediction_SFA_3D_Dataset_IOU_Dictionary[ "Confidence_Score_SFA_3D_Dataset" ].append( Object_Detection_Prediction_SFA_3D_Dataset[ "Confidence_Score_Prediction" ])
+
+            Object_Detection_Prediction_SFA_3D_Dataset_IOU_Dictionary[ "Object_Detection_IOU" ].append( max( list_of_IOU_Object_Detection_SFA_3D_Dataset ))
+
+        Object_Detection_Prediction_SFA_3D_Dataset_IOU = pd.DataFrame( Object_Detection_Prediction_SFA_3D_Dataset_IOU_Dictionary )
+
+        #print( Object_Detection_Prediction_SFA_3D_Dataset_IOU.to_string() )
+
+        Object_Detection_Prediction_SFA_3D_Dataset_IOU = Object_Detection_Prediction_SFA_3D_Dataset_IOU.sort_values( "Confidence_Score_SFA_3D_Dataset" , ascending=False )
+
+        Object_Detection_Prediction_SFA_3D_Average_Precision_Dictionary = {}
+
+        for iou_threshold in range( 50 , 100 , 5 ):
+
+            IOU_Treshold_Minimum_Value = iou_threshold
+
+            IOU_Treshold_Minimum_Value = IOU_Treshold_Minimum_Value / 100 
+
+            Object_Detection_Prediction_SFA_3D_Dataset_IOU[ "SFA_3D_Dataset_Prediction_Result" ] = Object_Detection_Prediction_SFA_3D_Dataset_IOU[ "Object_Detection_IOU" ].apply( lambda row : 1 if row >= IOU_Treshold_Minimum_Value else 0 )
+
+            y_true = np.array( Object_Detection_Prediction_SFA_3D_Dataset_IOU[ "SFA_3D_Dataset_Prediction_Result"])
+            y_scores = np.array( Object_Detection_Prediction_SFA_3D_Dataset_IOU[ "Confidence_Score_SFA_3D_Dataset" ] )
+
+            #print( "SFA 3D Dataset Ground Truth is : " + str( y_true ))
+
+            #print( "SFA 3D Dataset Prediction is : " + str( y_scores ) )
+            
+            Object_Detection_Prediction_SFA_3D_Average_Precision_Dictionary[ str( IOU_Treshold_Minimum_Value ) ] = average_precision_score(y_true, y_scores)
+
+        print( "Average Precision of Object Detection SFA 3D Dataset is : " + str( Object_Detection_Prediction_SFA_3D_Average_Precision_Dictionary ) )
+
+        print( "Average Precision Object Detection SFA 3D with IOU Treshold Minimul 0.50 , 0.55 , .. 0.95 is : " + str( np.array( [ Object_Detection_Prediction_SFA_3D_Average_Precision_Dictionary[ i ] for i in Object_Detection_Prediction_SFA_3D_Average_Precision_Dictionary.keys() ]).mean()))
+
+        print( "Average IOU of Object Detection SFA 3D Is : " + str( Object_Detection_Prediction_SFA_3D_Dataset_IOU[ "Object_Detection_IOU" ].mean() ) )
+
+        #SFA_3D_Rosbag_Hyundai_Evaluation_Dictionary[ "SFA_3D_Rosbag_Hyundai_Model_Path" ].append( str( SFA_3D_Rosbag_Hyundai_Model_Path ) )
+
+        SFA_3D_Rosbag_Hyundai_Evaluation_Dictionary[ "SFA_3D_Rosbag_Average_Precision" ].append( Object_Detection_Prediction_SFA_3D_Average_Precision_Dictionary )
+
+        SFA_3D_Rosbag_Hyundai_Evaluation_Dictionary[ "SFA_3D_Rosbag_Average_Precision_0.5_0.55_0.95" ].append( np.array( [ Object_Detection_Prediction_SFA_3D_Average_Precision_Dictionary[ i ] for i in Object_Detection_Prediction_SFA_3D_Average_Precision_Dictionary.keys() ]).mean() )
+        
+        SFA_3D_Rosbag_Hyundai_Evaluation_Dictionary[ "SFA_3D_Rosbag_Hyundai_Average_IOU" ].append( Object_Detection_Prediction_SFA_3D_Dataset_IOU[ "Object_Detection_IOU" ].mean() )
+
+        print( "-------------------------------------------------------------------")
+
+        SFA_3D_Rosbag_Hyundai_Evaluation_Dataset = pd.DataFrame( SFA_3D_Rosbag_Hyundai_Evaluation_Dictionary )
+
+        SFA_3D_Rosbag_Hyundai_Evaluation_Dataset = SFA_3D_Rosbag_Hyundai_Evaluation_Dataset.sort_values( "SFA_3D_Rosbag_Average_Precision_0.5_0.55_0.95" , ascending= False )
+
+        export = SFA_3D_Rosbag_Hyundai_Evaluation_Dataset.to_csv( os.path.join( configs.checkpoints_dir , "SFA_3D_Rosbag_Hyundai_Evaluation_SFA_3D_Model_{}_Epoch_{}.csv".format( configs.saved_fn , number_epoch ) ) , index = False )
+
+
 
     return losses.avg
 

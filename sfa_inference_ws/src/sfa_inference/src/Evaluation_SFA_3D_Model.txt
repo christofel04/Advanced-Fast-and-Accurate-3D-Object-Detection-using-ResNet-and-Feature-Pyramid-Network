@@ -1,0 +1,36 @@
+Empty DataFrame
+Columns: [Image_Path_Dataset_SFA_3D, Confidence_Score_SFA_3D_Dataset, Coordinate_of_SFA_3D_Object_Dataset]
+Index: []
+Empty DataFrame
+Columns: [Object_Detection_Prediction_Index, Confidence_Score_SFA_3D_Dataset, Object_Detection_IOU]
+Index: []
+SFA 3D Dataset Ground Truth is : []
+SFA 3D Dataset Prediction is : []
+  Image_Path_Dataset_SFA_3D  Confidence_Score_SFA_3D_Dataset Coordinate_of_SFA_3D_Object_Dataset
+0                000010.png                            100.0        [458.0, 288.0, 467.0, 280.0]
+   Object_Detection_Prediction_Index  Confidence_Score_SFA_3D_Dataset  Object_Detection_IOU
+0                                  0                          0.45246                     0
+SFA 3D Dataset Ground Truth is : [0]
+SFA 3D Dataset Prediction is : [0.45245969]
+SFA 3D Dataset Ground Truth is : [0]
+SFA 3D Dataset Prediction is : [0.45245969]
+SFA 3D Dataset Ground Truth is : [0]
+SFA 3D Dataset Prediction is : [0.45245969]
+SFA 3D Dataset Ground Truth is : [0]
+SFA 3D Dataset Prediction is : [0.45245969]
+SFA 3D Dataset Ground Truth is : [0]
+SFA 3D Dataset Prediction is : [0.45245969]
+SFA 3D Dataset Ground Truth is : [0]
+SFA 3D Dataset Prediction is : [0.45245969]
+SFA 3D Dataset Ground Truth is : [0]
+SFA 3D Dataset Prediction is : [0.45245969]
+SFA 3D Dataset Ground Truth is : [0]
+SFA 3D Dataset Prediction is : [0.45245969]
+SFA 3D Dataset Ground Truth is : [0]
+SFA 3D Dataset Prediction is : [0.45245969]
+SFA 3D Dataset Ground Truth is : [0]
+SFA 3D Dataset Prediction is : [0.45245969]
+Average Precision of Object Detection SFA 3D Dataset is : {'0.5': nan, '0.55': nan, '0.6': nan, '0.65': nan, '0.7': nan, '0.75': nan, '0.8': nan, '0.85': nan, '0.9': nan, '0.95': nan}
+Average Precision Object Detection SFA 3D with IOU Treshold Minimul 0.50 , 0.55 , .. 0.95 is : nan
+Average IOU of Object Detection SFA 3D Is : 0.0
+-------------------------------------------------------------------

@@ -2,6 +2,8 @@ import math
 
 import numpy as np
 
+SFA_3D_BEV_HEIGHT_WIDTH = 800
+
 # Car and Van ==> Car class
 # Pedestrian and Person_Sitting ==> Pedestrian Class
 CLASS_NAME_TO_ID = {
@@ -21,10 +23,10 @@ colors = [[0, 255, 255], [0, 0, 255], [255, 0, 0], [255, 120, 0],
 
 #####################################################################################
 boundary = {
-    "minX": 0,
-    "maxX": 50,
-    "minY": -25,
-    "maxY": 25,
+    "minX": -100,
+    "maxX": 100,
+    "minY": -100,
+    "maxY": 100,
     "minZ": -2.73,
     "maxZ": 1.27
 }
@@ -42,8 +44,8 @@ boundary_back = {
     "maxZ": 1.27
 }
 
-BEV_WIDTH = 608  # across y axis -25m ~ 25m
-BEV_HEIGHT = 608  # across x axis 0m ~ 50m
+BEV_WIDTH = SFA_3D_BEV_HEIGHT_WIDTH #across y axis -25m ~ 25m
+BEV_HEIGHT = SFA_3D_BEV_HEIGHT_WIDTH   # across x axis 0m ~ 50m
 DISCRETIZATION = (boundary["maxX"] - boundary["minX"]) / BEV_HEIGHT
 
 # maximum number of points per voxel

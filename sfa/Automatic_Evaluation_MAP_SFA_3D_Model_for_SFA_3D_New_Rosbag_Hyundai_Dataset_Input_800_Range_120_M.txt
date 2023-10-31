@@ -1,0 +1,487 @@
+Training SFA 3D Dataset Bounding Box Hyundai Race on Dataset : /home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data/
+Creating Ground Truth SFA 3D Rosbag Hyundai Dataset
+Checking SFA 3D Rosbag Hyundai Model Loss_tensor(0.0491, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_250.pth
+using ResNet architecture with feature pyramid
+
+
+-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=
+
+
+Loaded weights from /home/ofel04/SFA3D/checkpoints/Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M/Loss_tensor(0.0491, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_250.pth
+
+Training SFA 3D Dataset Bounding Box Hyundai Race on Dataset : /home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data/
+Average Precision of Object Detection SFA 3D Dataset is : {'0.5': 0.9780536341893813, '0.55': 0.873643267304145, '0.6': 0.6861688483549493, '0.65': 0.47331695839809196, '0.7': 0.2178398241391183, '0.75': 0.06603268863407769, '0.8': 0.01749409065235675, '0.85': 0.0022010124879528227, '0.9': 0.00024077662653887905, '0.95': nan}
+Average Precision Object Detection SFA 3D with IOU Treshold Minimul 0.50 , 0.55 , .. 0.95 is : nan
+Average IOU of Object Detection SFA 3D Is : 0.6379834437893934
+-------------------------------------------------------------------
+Checking SFA 3D Rosbag Hyundai Model Loss_tensor(0.0616, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_290.pth
+using ResNet architecture with feature pyramid
+
+
+-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=
+
+
+Loaded weights from /home/ofel04/SFA3D/checkpoints/Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M/Loss_tensor(0.0616, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_290.pth
+
+Training SFA 3D Dataset Bounding Box Hyundai Race on Dataset : /home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data/
+/usr/local/lib/python3.8/dist-packages/shapely/set_operations.py:133: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/usr/local/lib/python3.8/dist-packages/sklearn/metrics/_ranking.py:677: RuntimeWarning: invalid value encountered in divide
+  recall = tps / tps[-1]
+Average Precision of Object Detection SFA 3D Dataset is : {'0.5': 0.9813336694374656, '0.55': 0.875438997885323, '0.6': 0.6973116877747644, '0.65': 0.48394072018079, '0.7': 0.2429642805314616, '0.75': 0.06643949079219663, '0.8': 0.011451491422614025, '0.85': 0.0018142400141750695, '0.9': 0.00022555847624203563, '0.95': nan}
+Average Precision Object Detection SFA 3D with IOU Treshold Minimul 0.50 , 0.55 , .. 0.95 is : nan
+Average IOU of Object Detection SFA 3D Is : 0.6381320992852643
+-------------------------------------------------------------------
+Checking SFA 3D Rosbag Hyundai Model Loss_tensor(0.0671, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_288.pth
+using ResNet architecture with feature pyramid
+
+
+-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=
+
+
+Loaded weights from /home/ofel04/SFA3D/checkpoints/Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M/Loss_tensor(0.0671, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_288.pth
+
+Training SFA 3D Dataset Bounding Box Hyundai Race on Dataset : /home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data/
+/usr/local/lib/python3.8/dist-packages/shapely/set_operations.py:133: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/usr/local/lib/python3.8/dist-packages/sklearn/metrics/_ranking.py:677: RuntimeWarning: invalid value encountered in divide
+  recall = tps / tps[-1]
+Average Precision of Object Detection SFA 3D Dataset is : {'0.5': 0.9813677389354579, '0.55': 0.8709099445156485, '0.6': 0.6952402646257857, '0.65': 0.49050666429024453, '0.7': 0.23583200399226176, '0.75': 0.06511080173333875, '0.8': 0.01273475782761153, '0.85': 0.0018074335550012654, '0.9': 0.000246016058931271, '0.95': nan}
+Average Precision Object Detection SFA 3D with IOU Treshold Minimul 0.50 , 0.55 , .. 0.95 is : nan
+Average IOU of Object Detection SFA 3D Is : 0.6396132278253474
+-------------------------------------------------------------------
+Checking SFA 3D Rosbag Hyundai Model Loss_tensor(0.0679, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_278.pth
+using ResNet architecture with feature pyramid
+
+
+-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=
+
+
+Loaded weights from /home/ofel04/SFA3D/checkpoints/Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M/Loss_tensor(0.0679, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_278.pth
+
+Training SFA 3D Dataset Bounding Box Hyundai Race on Dataset : /home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data/
+/usr/local/lib/python3.8/dist-packages/shapely/set_operations.py:133: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/usr/local/lib/python3.8/dist-packages/sklearn/metrics/_ranking.py:677: RuntimeWarning: invalid value encountered in divide
+  recall = tps / tps[-1]
+Average Precision of Object Detection SFA 3D Dataset is : {'0.5': 0.9844827452465064, '0.55': 0.8907296593278851, '0.6': 0.7143800522376832, '0.65': 0.5040467569863922, '0.7': 0.24726577739163563, '0.75': 0.07052805395150923, '0.8': 0.012928814769335183, '0.85': 0.0017392486255631548, '0.9': 0.00022001073643705105, '0.95': nan}
+Average Precision Object Detection SFA 3D with IOU Treshold Minimul 0.50 , 0.55 , .. 0.95 is : nan
+Average IOU of Object Detection SFA 3D Is : 0.6421866015439076
+-------------------------------------------------------------------
+Checking SFA 3D Rosbag Hyundai Model Loss_tensor(0.0730, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_268.pth
+using ResNet architecture with feature pyramid
+
+
+-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=
+
+
+Loaded weights from /home/ofel04/SFA3D/checkpoints/Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M/Loss_tensor(0.0730, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_268.pth
+
+Training SFA 3D Dataset Bounding Box Hyundai Race on Dataset : /home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data/
+/usr/local/lib/python3.8/dist-packages/shapely/set_operations.py:133: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/usr/local/lib/python3.8/dist-packages/sklearn/metrics/_ranking.py:677: RuntimeWarning: invalid value encountered in divide
+  recall = tps / tps[-1]
+Average Precision of Object Detection SFA 3D Dataset is : {'0.5': 0.9767758002738153, '0.55': 0.8719294183573536, '0.6': 0.6891776171760574, '0.65': 0.4679689119567728, '0.7': 0.22000738139744563, '0.75': 0.05891445751509827, '0.8': 0.012906910556232203, '0.85': 0.001901761916833564, '0.9': 0.00016639399572016854, '0.95': nan}
+Average Precision Object Detection SFA 3D with IOU Treshold Minimul 0.50 , 0.55 , .. 0.95 is : nan
+Average IOU of Object Detection SFA 3D Is : 0.6342746967357327
+-------------------------------------------------------------------
+Checking SFA 3D Rosbag Hyundai Model Loss_tensor(0.0792, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_256.pth
+using ResNet architecture with feature pyramid
+
+
+-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=
+
+
+Loaded weights from /home/ofel04/SFA3D/checkpoints/Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M/Loss_tensor(0.0792, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_256.pth
+
+Training SFA 3D Dataset Bounding Box Hyundai Race on Dataset : /home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data/
+/usr/local/lib/python3.8/dist-packages/shapely/set_operations.py:133: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/usr/local/lib/python3.8/dist-packages/sklearn/metrics/_ranking.py:677: RuntimeWarning: invalid value encountered in divide
+  recall = tps / tps[-1]
+Average Precision of Object Detection SFA 3D Dataset is : {'0.5': 0.9802365942682253, '0.55': 0.8649570343768168, '0.6': 0.6820898985274786, '0.65': 0.4657169507256183, '0.7': 0.22415574600630284, '0.75': 0.06129721347470387, '0.8': 0.01162507244954479, '0.85': 0.001734169275548097, '0.9': 0.0001870290412892847, '0.95': nan}
+Average Precision Object Detection SFA 3D with IOU Treshold Minimul 0.50 , 0.55 , .. 0.95 is : nan
+Average IOU of Object Detection SFA 3D Is : 0.6371229340646897
+-------------------------------------------------------------------
+Checking SFA 3D Rosbag Hyundai Model Loss_tensor(0.0807, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_296.pth
+using ResNet architecture with feature pyramid
+
+
+-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=
+
+
+Loaded weights from /home/ofel04/SFA3D/checkpoints/Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M/Loss_tensor(0.0807, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_296.pth
+
+Training SFA 3D Dataset Bounding Box Hyundai Race on Dataset : /home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data/
+/usr/local/lib/python3.8/dist-packages/shapely/set_operations.py:133: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/usr/local/lib/python3.8/dist-packages/sklearn/metrics/_ranking.py:677: RuntimeWarning: invalid value encountered in divide
+  recall = tps / tps[-1]
+Average Precision of Object Detection SFA 3D Dataset is : {'0.5': 0.9843855606821951, '0.55': 0.8768142720203465, '0.6': 0.6983737709832127, '0.65': 0.48591913947791227, '0.7': 0.23126466039863852, '0.75': 0.06069995050805675, '0.8': 0.011758102869461998, '0.85': 0.0017236513778253772, '0.9': 0.00025504882810394584, '0.95': nan}
+Average Precision Object Detection SFA 3D with IOU Treshold Minimul 0.50 , 0.55 , .. 0.95 is : nan
+Average IOU of Object Detection SFA 3D Is : 0.6409054644343872
+-------------------------------------------------------------------
+Checking SFA 3D Rosbag Hyundai Model Loss_tensor(0.0887, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_252.pth
+using ResNet architecture with feature pyramid
+
+
+-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=
+
+
+Loaded weights from /home/ofel04/SFA3D/checkpoints/Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M/Loss_tensor(0.0887, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_252.pth
+
+Training SFA 3D Dataset Bounding Box Hyundai Race on Dataset : /home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data/
+/usr/local/lib/python3.8/dist-packages/shapely/set_operations.py:133: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/usr/local/lib/python3.8/dist-packages/sklearn/metrics/_ranking.py:677: RuntimeWarning: invalid value encountered in divide
+  recall = tps / tps[-1]
+Average Precision of Object Detection SFA 3D Dataset is : {'0.5': 0.9819962973095875, '0.55': 0.8785496406460801, '0.6': 0.703558391359127, '0.65': 0.4933936537143735, '0.7': 0.2376827275041611, '0.75': 0.07015963665858188, '0.8': 0.01364868194176216, '0.85': 0.0018750132423166264, '0.9': 0.0002721906594221706, '0.95': nan}
+Average Precision Object Detection SFA 3D with IOU Treshold Minimul 0.50 , 0.55 , .. 0.95 is : nan
+Average IOU of Object Detection SFA 3D Is : 0.6383153059971344
+-------------------------------------------------------------------
+Checking SFA 3D Rosbag Hyundai Model Loss_tensor(0.0958, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_272.pth
+using ResNet architecture with feature pyramid
+
+
+-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=
+
+
+Loaded weights from /home/ofel04/SFA3D/checkpoints/Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M/Loss_tensor(0.0958, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_272.pth
+
+Training SFA 3D Dataset Bounding Box Hyundai Race on Dataset : /home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data/
+/usr/local/lib/python3.8/dist-packages/shapely/set_operations.py:133: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/usr/local/lib/python3.8/dist-packages/sklearn/metrics/_ranking.py:677: RuntimeWarning: invalid value encountered in divide
+  recall = tps / tps[-1]
+Average Precision of Object Detection SFA 3D Dataset is : {'0.5': 0.9817645214812679, '0.55': 0.8773368805964857, '0.6': 0.7045222402319727, '0.65': 0.47631670971392637, '0.7': 0.23287447272792033, '0.75': 0.06580820190785754, '0.8': 0.011327272434169054, '0.85': 0.0015854289417798853, '0.9': 0.00021334675111023068, '0.95': nan}
+Average Precision Object Detection SFA 3D with IOU Treshold Minimul 0.50 , 0.55 , .. 0.95 is : nan
+Average IOU of Object Detection SFA 3D Is : 0.638972639246435
+-------------------------------------------------------------------
+Checking SFA 3D Rosbag Hyundai Model Loss_tensor(0.1150, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_284.pth
+using ResNet architecture with feature pyramid
+
+
+-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=
+
+
+Loaded weights from /home/ofel04/SFA3D/checkpoints/Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M/Loss_tensor(0.1150, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_284.pth
+
+Training SFA 3D Dataset Bounding Box Hyundai Race on Dataset : /home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data/
+/usr/local/lib/python3.8/dist-packages/shapely/set_operations.py:133: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/usr/local/lib/python3.8/dist-packages/sklearn/metrics/_ranking.py:677: RuntimeWarning: invalid value encountered in divide
+  recall = tps / tps[-1]
+Average Precision of Object Detection SFA 3D Dataset is : {'0.5': 0.984758172116256, '0.55': 0.889808874319507, '0.6': 0.7201627164696935, '0.65': 0.5212719654716541, '0.7': 0.2576683585264296, '0.75': 0.07585350324030274, '0.8': 0.012220604093796092, '0.85': 0.0018309463767992506, '0.9': 0.00023286148272266905, '0.95': nan}
+Average Precision Object Detection SFA 3D with IOU Treshold Minimul 0.50 , 0.55 , .. 0.95 is : nan
+Average IOU of Object Detection SFA 3D Is : 0.6417871730278109
+-------------------------------------------------------------------
+Checking SFA 3D Rosbag Hyundai Model Loss_tensor(0.1252, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_300.pth
+using ResNet architecture with feature pyramid
+
+
+-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=
+
+
+Loaded weights from /home/ofel04/SFA3D/checkpoints/Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M/Loss_tensor(0.1252, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_300.pth
+
+Training SFA 3D Dataset Bounding Box Hyundai Race on Dataset : /home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data/
+/usr/local/lib/python3.8/dist-packages/shapely/set_operations.py:133: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/usr/local/lib/python3.8/dist-packages/sklearn/metrics/_ranking.py:677: RuntimeWarning: invalid value encountered in divide
+  recall = tps / tps[-1]
+Average Precision of Object Detection SFA 3D Dataset is : {'0.5': 0.986332028300117, '0.55': 0.8942482261872284, '0.6': 0.7276303868250512, '0.65': 0.523919904007293, '0.7': 0.27211329310314636, '0.75': 0.0804821463074295, '0.8': 0.013784096399341896, '0.85': 0.0022189681049579, '0.9': 0.00024295454878349887, '0.95': 3.254572674607824e-05}
+Average Precision Object Detection SFA 3D with IOU Treshold Minimul 0.50 , 0.55 , .. 0.95 is : 0.3501004549510095
+Average IOU of Object Detection SFA 3D Is : 0.6455852083666812
+-------------------------------------------------------------------
+Checking SFA 3D Rosbag Hyundai Model Loss_tensor(0.1346, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_270.pth
+using ResNet architecture with feature pyramid
+
+
+-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=
+
+
+Loaded weights from /home/ofel04/SFA3D/checkpoints/Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M/Loss_tensor(0.1346, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_270.pth
+
+Training SFA 3D Dataset Bounding Box Hyundai Race on Dataset : /home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data/
+/usr/local/lib/python3.8/dist-packages/shapely/set_operations.py:133: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+Average Precision of Object Detection SFA 3D Dataset is : {'0.5': 0.9798740695081747, '0.55': 0.8691404249166887, '0.6': 0.6832472728307639, '0.65': 0.47539047966660386, '0.7': 0.2231495528711211, '0.75': 0.06134085719074546, '0.8': 0.01223085235269569, '0.85': 0.0015992146269105684, '0.9': 0.0001679556689124659, '0.95': nan}
+Average Precision Object Detection SFA 3D with IOU Treshold Minimul 0.50 , 0.55 , .. 0.95 is : nan
+Average IOU of Object Detection SFA 3D Is : 0.6353499951021714
+-------------------------------------------------------------------
+Checking SFA 3D Rosbag Hyundai Model Loss_tensor(0.1383, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_282.pth
+using ResNet architecture with feature pyramid
+
+
+-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=
+
+
+Loaded weights from /home/ofel04/SFA3D/checkpoints/Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M/Loss_tensor(0.1383, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_282.pth
+
+Training SFA 3D Dataset Bounding Box Hyundai Race on Dataset : /home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data/
+/usr/local/lib/python3.8/dist-packages/shapely/set_operations.py:133: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/usr/local/lib/python3.8/dist-packages/sklearn/metrics/_ranking.py:677: RuntimeWarning: invalid value encountered in divide
+  recall = tps / tps[-1]
+Average Precision of Object Detection SFA 3D Dataset is : {'0.5': 0.9797605992649966, '0.55': 0.8748310435637173, '0.6': 0.6883221229932148, '0.65': 0.4733817362384026, '0.7': 0.22283719206511388, '0.75': 0.06525067474082354, '0.8': 0.012677162836015943, '0.85': 0.0016817404786091117, '0.9': 0.00015967396358611543, '0.95': nan}
+Average Precision Object Detection SFA 3D with IOU Treshold Minimul 0.50 , 0.55 , .. 0.95 is : nan
+Average IOU of Object Detection SFA 3D Is : 0.6386913916717684
+-------------------------------------------------------------------
+Checking SFA 3D Rosbag Hyundai Model Loss_tensor(0.1410, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_264.pth
+using ResNet architecture with feature pyramid
+
+
+-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=
+
+
+Loaded weights from /home/ofel04/SFA3D/checkpoints/Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M/Loss_tensor(0.1410, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_264.pth
+
+Training SFA 3D Dataset Bounding Box Hyundai Race on Dataset : /home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data/
+/usr/local/lib/python3.8/dist-packages/shapely/set_operations.py:133: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/usr/local/lib/python3.8/dist-packages/sklearn/metrics/_ranking.py:677: RuntimeWarning: invalid value encountered in divide
+  recall = tps / tps[-1]
+Average Precision of Object Detection SFA 3D Dataset is : {'0.5': 0.9820350337035286, '0.55': 0.8764498836710841, '0.6': 0.6948444723864328, '0.65': 0.49324055479813717, '0.7': 0.23171991456250018, '0.75': 0.06907685028320168, '0.8': 0.012967546216238475, '0.85': 0.0018640476291645214, '0.9': 0.0002812424612832576, '0.95': nan}
+Average Precision Object Detection SFA 3D with IOU Treshold Minimul 0.50 , 0.55 , .. 0.95 is : nan
+Average IOU of Object Detection SFA 3D Is : 0.6404505919066709
+-------------------------------------------------------------------
+Checking SFA 3D Rosbag Hyundai Model Loss_tensor(0.1432, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_262.pth
+using ResNet architecture with feature pyramid
+
+
+-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=
+
+
+Loaded weights from /home/ofel04/SFA3D/checkpoints/Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M/Loss_tensor(0.1432, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_262.pth
+
+Training SFA 3D Dataset Bounding Box Hyundai Race on Dataset : /home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data/
+/usr/local/lib/python3.8/dist-packages/shapely/set_operations.py:133: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/usr/local/lib/python3.8/dist-packages/sklearn/metrics/_ranking.py:677: RuntimeWarning: invalid value encountered in divide
+  recall = tps / tps[-1]
+Average Precision of Object Detection SFA 3D Dataset is : {'0.5': 0.9839839392405609, '0.55': 0.8786424686297554, '0.6': 0.7051158698356006, '0.65': 0.5007842274590241, '0.7': 0.24367929026736668, '0.75': 0.07201996643548272, '0.8': 0.013545325432500494, '0.85': 0.0020102899645543354, '0.9': 0.0002773771599152947, '0.95': nan}
+Average Precision Object Detection SFA 3D with IOU Treshold Minimul 0.50 , 0.55 , .. 0.95 is : nan
+Average IOU of Object Detection SFA 3D Is : 0.6423161447271241
+-------------------------------------------------------------------
+Checking SFA 3D Rosbag Hyundai Model Loss_tensor(0.1479, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_274.pth
+using ResNet architecture with feature pyramid
+
+
+-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=
+
+
+Loaded weights from /home/ofel04/SFA3D/checkpoints/Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M/Loss_tensor(0.1479, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_274.pth
+
+Training SFA 3D Dataset Bounding Box Hyundai Race on Dataset : /home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data/
+/usr/local/lib/python3.8/dist-packages/shapely/set_operations.py:133: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/usr/local/lib/python3.8/dist-packages/sklearn/metrics/_ranking.py:677: RuntimeWarning: invalid value encountered in divide
+  recall = tps / tps[-1]
+Average Precision of Object Detection SFA 3D Dataset is : {'0.5': 0.9811367741230026, '0.55': 0.8716950598401949, '0.6': 0.6819464923702917, '0.65': 0.46532711549275907, '0.7': 0.218584525458289, '0.75': 0.06073206488001147, '0.8': 0.010900877796087692, '0.85': 0.0013245862538914597, '0.9': 0.0001841281481124811, '0.95': nan}
+Average Precision Object Detection SFA 3D with IOU Treshold Minimul 0.50 , 0.55 , .. 0.95 is : nan
+Average IOU of Object Detection SFA 3D Is : 0.6368872218140638
+-------------------------------------------------------------------
+Checking SFA 3D Rosbag Hyundai Model Loss_tensor(0.1504, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_280.pth
+using ResNet architecture with feature pyramid
+
+
+-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=
+
+
+Loaded weights from /home/ofel04/SFA3D/checkpoints/Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M/Loss_tensor(0.1504, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_280.pth
+
+Training SFA 3D Dataset Bounding Box Hyundai Race on Dataset : /home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data/
+/usr/local/lib/python3.8/dist-packages/shapely/set_operations.py:133: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/usr/local/lib/python3.8/dist-packages/sklearn/metrics/_ranking.py:677: RuntimeWarning: invalid value encountered in divide
+  recall = tps / tps[-1]
+Average Precision of Object Detection SFA 3D Dataset is : {'0.5': 0.982330497298334, '0.55': 0.8772182056660005, '0.6': 0.7020038393457291, '0.65': 0.48410355651272885, '0.7': 0.23180566874803815, '0.75': 0.06460325220688792, '0.8': 0.011425616383364697, '0.85': 0.0017292470007545893, '0.9': 0.00023920173347982752, '0.95': nan}
+Average Precision Object Detection SFA 3D with IOU Treshold Minimul 0.50 , 0.55 , .. 0.95 is : nan
+Average IOU of Object Detection SFA 3D Is : 0.6398717577387797
+-------------------------------------------------------------------
+Checking SFA 3D Rosbag Hyundai Model Loss_tensor(0.1639, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_258.pth
+using ResNet architecture with feature pyramid
+
+
+-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=
+
+
+Loaded weights from /home/ofel04/SFA3D/checkpoints/Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M/Loss_tensor(0.1639, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_258.pth
+
+Training SFA 3D Dataset Bounding Box Hyundai Race on Dataset : /home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data/
+/usr/local/lib/python3.8/dist-packages/shapely/set_operations.py:133: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/usr/local/lib/python3.8/dist-packages/sklearn/metrics/_ranking.py:677: RuntimeWarning: invalid value encountered in divide
+  recall = tps / tps[-1]
+Average Precision of Object Detection SFA 3D Dataset is : {'0.5': 0.9805171451854039, '0.55': 0.8731477124256064, '0.6': 0.6908090296407574, '0.65': 0.4811260566468976, '0.7': 0.2274364648717323, '0.75': 0.06852713484619946, '0.8': 0.012807667363206973, '0.85': 0.0017589994885655299, '0.9': 0.0002829417342081846, '0.95': 3.224454261116306e-05}
+Average Precision Object Detection SFA 3D with IOU Treshold Minimul 0.50 , 0.55 , .. 0.95 is : 0.3336445396745189
+Average IOU of Object Detection SFA 3D Is : 0.6379244744881429
+-------------------------------------------------------------------
+Checking SFA 3D Rosbag Hyundai Model Loss_tensor(0.1771, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_298.pth
+using ResNet architecture with feature pyramid
+
+
+-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=
+
+
+Loaded weights from /home/ofel04/SFA3D/checkpoints/Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M/Loss_tensor(0.1771, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_298.pth
+
+Training SFA 3D Dataset Bounding Box Hyundai Race on Dataset : /home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data/
+/usr/local/lib/python3.8/dist-packages/shapely/set_operations.py:133: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+Average Precision of Object Detection SFA 3D Dataset is : {'0.5': 0.9829128416440611, '0.55': 0.8707547186616913, '0.6': 0.6933691722143029, '0.65': 0.4700363135590624, '0.7': 0.2320619455284409, '0.75': 0.06353840788430916, '0.8': 0.011559315028623868, '0.85': 0.0016065601249475995, '0.9': 0.00015563643233676124, '0.95': nan}
+Average Precision Object Detection SFA 3D with IOU Treshold Minimul 0.50 , 0.55 , .. 0.95 is : nan
+Average IOU of Object Detection SFA 3D Is : 0.6378641113565946
+-------------------------------------------------------------------
+Checking SFA 3D Rosbag Hyundai Model Loss_tensor(0.1947, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_260.pth
+using ResNet architecture with feature pyramid
+
+
+-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=
+
+
+Loaded weights from /home/ofel04/SFA3D/checkpoints/Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M/Loss_tensor(0.1947, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_260.pth
+
+Training SFA 3D Dataset Bounding Box Hyundai Race on Dataset : /home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data/
+/usr/local/lib/python3.8/dist-packages/shapely/set_operations.py:133: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/usr/local/lib/python3.8/dist-packages/sklearn/metrics/_ranking.py:677: RuntimeWarning: invalid value encountered in divide
+  recall = tps / tps[-1]
+Average Precision of Object Detection SFA 3D Dataset is : {'0.5': 0.9848725809997183, '0.55': 0.8819669321238333, '0.6': 0.7412134905061492, '0.65': 0.5086857035741061, '0.7': 0.25132129476350634, '0.75': 0.07835523481856321, '0.8': 0.016969051691661345, '0.85': 0.0020254752916789016, '0.9': 0.0002558225133490409, '0.95': 0.00013721589441439334}
+Average Precision Object Detection SFA 3D with IOU Treshold Minimul 0.50 , 0.55 , .. 0.95 is : 0.346580280217698
+Average IOU of Object Detection SFA 3D Is : 0.6442742613839489
+-------------------------------------------------------------------
+Checking SFA 3D Rosbag Hyundai Model Loss_tensor(0.2024, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_292.pth
+using ResNet architecture with feature pyramid
+
+
+-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=
+
+
+Loaded weights from /home/ofel04/SFA3D/checkpoints/Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M/Loss_tensor(0.2024, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_292.pth
+
+Training SFA 3D Dataset Bounding Box Hyundai Race on Dataset : /home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data/
+/usr/local/lib/python3.8/dist-packages/shapely/set_operations.py:133: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+Average Precision of Object Detection SFA 3D Dataset is : {'0.5': 0.9827855106782486, '0.55': 0.8757760431216779, '0.6': 0.7002896194318112, '0.65': 0.47782072322470304, '0.7': 0.23119259533720143, '0.75': 0.06712618144350754, '0.8': 0.012473140556658751, '0.85': 0.001895476899287012, '0.9': 0.00022233216571455056, '0.95': 3.2324799586242565e-05}
+Average Precision Object Detection SFA 3D with IOU Treshold Minimul 0.50 , 0.55 , .. 0.95 is : 0.33496139476583964
+Average IOU of Object Detection SFA 3D Is : 0.6397367729497311
+-------------------------------------------------------------------
+Checking SFA 3D Rosbag Hyundai Model Loss_tensor(0.2170, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_266.pth
+using ResNet architecture with feature pyramid
+
+
+-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=
+
+
+Loaded weights from /home/ofel04/SFA3D/checkpoints/Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M/Loss_tensor(0.2170, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_266.pth
+
+Training SFA 3D Dataset Bounding Box Hyundai Race on Dataset : /home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data/
+/usr/local/lib/python3.8/dist-packages/shapely/set_operations.py:133: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+Average Precision of Object Detection SFA 3D Dataset is : {'0.5': 0.9786505699310555, '0.55': 0.871763754848377, '0.6': 0.6834028162105918, '0.65': 0.46960777701878204, '0.7': 0.21302252291725926, '0.75': 0.05342215156294932, '0.8': 0.010365259691176564, '0.85': 0.001727708113871445, '0.9': 0.00018570452609844117, '0.95': nan}
+Average Precision Object Detection SFA 3D with IOU Treshold Minimul 0.50 , 0.55 , .. 0.95 is : nan
+Average IOU of Object Detection SFA 3D Is : 0.6330773744322756
+-------------------------------------------------------------------
+Checking SFA 3D Rosbag Hyundai Model Loss_tensor(0.2310, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_276.pth
+using ResNet architecture with feature pyramid
+
+
+-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=
+
+
+Loaded weights from /home/ofel04/SFA3D/checkpoints/Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M/Loss_tensor(0.2310, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_276.pth
+
+Training SFA 3D Dataset Bounding Box Hyundai Race on Dataset : /home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data/
+/usr/local/lib/python3.8/dist-packages/shapely/set_operations.py:133: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/usr/local/lib/python3.8/dist-packages/sklearn/metrics/_ranking.py:677: RuntimeWarning: invalid value encountered in divide
+  recall = tps / tps[-1]
+Average Precision of Object Detection SFA 3D Dataset is : {'0.5': 0.9841296631607959, '0.55': 0.8840676989337655, '0.6': 0.7201689802056142, '0.65': 0.5162877926114395, '0.7': 0.26771351411676525, '0.75': 0.07609609046552711, '0.8': 0.012662161348176326, '0.85': 0.0018848904385272958, '0.9': 0.00024221638636839037, '0.95': nan}
+Average Precision Object Detection SFA 3D with IOU Treshold Minimul 0.50 , 0.55 , .. 0.95 is : nan
+Average IOU of Object Detection SFA 3D Is : 0.6424912928908268
+-------------------------------------------------------------------
+Checking SFA 3D Rosbag Hyundai Model Loss_tensor(0.2553, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_294.pth
+using ResNet architecture with feature pyramid
+
+
+-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=
+
+
+Loaded weights from /home/ofel04/SFA3D/checkpoints/Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M/Loss_tensor(0.2553, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_294.pth
+
+Training SFA 3D Dataset Bounding Box Hyundai Race on Dataset : /home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data/
+/usr/local/lib/python3.8/dist-packages/shapely/set_operations.py:133: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/usr/local/lib/python3.8/dist-packages/sklearn/metrics/_ranking.py:677: RuntimeWarning: invalid value encountered in divide
+  recall = tps / tps[-1]
+Average Precision of Object Detection SFA 3D Dataset is : {'0.5': 0.980062021958756, '0.55': 0.8653403029529994, '0.6': 0.6764902174645608, '0.65': 0.4650583651328478, '0.7': 0.21074274792074918, '0.75': 0.05292078185442375, '0.8': 0.010216182582244153, '0.85': 0.0014807092999072039, '0.9': 0.00013151150284626965, '0.95': nan}
+Average Precision Object Detection SFA 3D with IOU Treshold Minimul 0.50 , 0.55 , .. 0.95 is : nan
+Average IOU of Object Detection SFA 3D Is : 0.6344595437190245
+-------------------------------------------------------------------
+Checking SFA 3D Rosbag Hyundai Model Loss_tensor(0.2791, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_254.pth
+using ResNet architecture with feature pyramid
+
+
+-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=
+
+
+Loaded weights from /home/ofel04/SFA3D/checkpoints/Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M/Loss_tensor(0.2791, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_254.pth
+
+Training SFA 3D Dataset Bounding Box Hyundai Race on Dataset : /home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data/
+/usr/local/lib/python3.8/dist-packages/shapely/set_operations.py:133: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/usr/local/lib/python3.8/dist-packages/sklearn/metrics/_ranking.py:677: RuntimeWarning: invalid value encountered in divide
+  recall = tps / tps[-1]
+Average Precision of Object Detection SFA 3D Dataset is : {'0.5': 0.9791397725889759, '0.55': 0.8662330298920089, '0.6': 0.6838419548322858, '0.65': 0.47183527586881024, '0.7': 0.22059284739356477, '0.75': 0.06407781050012168, '0.8': 0.012729826948590898, '0.85': 0.0017166893318036642, '0.9': 0.00027194269974253893, '0.95': nan}
+Average Precision Object Detection SFA 3D with IOU Treshold Minimul 0.50 , 0.55 , .. 0.95 is : nan
+Average IOU of Object Detection SFA 3D Is : 0.6385391095927704
+-------------------------------------------------------------------
+Checking SFA 3D Rosbag Hyundai Model Loss_tensor(0.3440, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_286.pth
+using ResNet architecture with feature pyramid
+
+
+-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=-*=
+
+
+Loaded weights from /home/ofel04/SFA3D/checkpoints/Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M/Loss_tensor(0.3440, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_286.pth
+
+Training SFA 3D Dataset Bounding Box Hyundai Race on Dataset : /home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data/
+/usr/local/lib/python3.8/dist-packages/shapely/set_operations.py:133: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/usr/local/lib/python3.8/dist-packages/sklearn/metrics/_ranking.py:677: RuntimeWarning: invalid value encountered in divide
+  recall = tps / tps[-1]
+Average Precision of Object Detection SFA 3D Dataset is : {'0.5': 0.9768347849696065, '0.55': 0.8498687439727056, '0.6': 0.6519391673581751, '0.65': 0.4323542475312781, '0.7': 0.18730901764461255, '0.75': 0.04645788746368612, '0.8': 0.009584202754431607, '0.85': 0.0016469192360670367, '0.9': 0.0001934084090964773, '0.95': 3.2285142377477883e-05}
+Average Precision Object Detection SFA 3D with IOU Treshold Minimul 0.50 , 0.55 , .. 0.95 is : 0.3156220664482037
+Average IOU of Object Detection SFA 3D Is : 0.6307603829703337
+-------------------------------------------------------------------
+                                                                                                                        SFA_3D_Rosbag_Hyundai_Model_Path                                                                                                                                                                                                                                                                     SFA_3D_Rosbag_Average_Precision  SFA_3D_Rosbag_Average_Precision_0.5_0.55_0.95  SFA_3D_Rosbag_Hyundai_Average_IOU
+10  Loss_tensor(0.1252, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_300.pth         {'0.5': 0.986332028300117, '0.55': 0.8942482261872284, '0.6': 0.7276303868250512, '0.65': 0.523919904007293, '0.7': 0.27211329310314636, '0.75': 0.0804821463074295, '0.8': 0.013784096399341896, '0.85': 0.0022189681049579, '0.9': 0.00024295454878349887, '0.95': 3.254572674607824e-05}                                       0.350100                           0.645585
+19  Loss_tensor(0.1947, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_260.pth   {'0.5': 0.9848725809997183, '0.55': 0.8819669321238333, '0.6': 0.7412134905061492, '0.65': 0.5086857035741061, '0.7': 0.25132129476350634, '0.75': 0.07835523481856321, '0.8': 0.016969051691661345, '0.85': 0.0020254752916789016, '0.9': 0.0002558225133490409, '0.95': 0.00013721589441439334}                                       0.346580                           0.644274
+20  Loss_tensor(0.2024, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_292.pth  {'0.5': 0.9827855106782486, '0.55': 0.8757760431216779, '0.6': 0.7002896194318112, '0.65': 0.47782072322470304, '0.7': 0.23119259533720143, '0.75': 0.06712618144350754, '0.8': 0.012473140556658751, '0.85': 0.001895476899287012, '0.9': 0.00022233216571455056, '0.95': 3.2324799586242565e-05}                                       0.334961                           0.639737
+17  Loss_tensor(0.1639, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_258.pth     {'0.5': 0.9805171451854039, '0.55': 0.8731477124256064, '0.6': 0.6908090296407574, '0.65': 0.4811260566468976, '0.7': 0.2274364648717323, '0.75': 0.06852713484619946, '0.8': 0.012807667363206973, '0.85': 0.0017589994885655299, '0.9': 0.0002829417342081846, '0.95': 3.224454261116306e-05}                                       0.333645                           0.637924
+25  Loss_tensor(0.3440, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_286.pth   {'0.5': 0.9768347849696065, '0.55': 0.8498687439727056, '0.6': 0.6519391673581751, '0.65': 0.4323542475312781, '0.7': 0.18730901764461255, '0.75': 0.04645788746368612, '0.8': 0.009584202754431607, '0.85': 0.0016469192360670367, '0.9': 0.0001934084090964773, '0.95': 3.2285142377477883e-05}                                       0.315622                           0.630760
+0   Loss_tensor(0.0491, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_250.pth                       {'0.5': 0.9780536341893813, '0.55': 0.873643267304145, '0.6': 0.6861688483549493, '0.65': 0.47331695839809196, '0.7': 0.2178398241391183, '0.75': 0.06603268863407769, '0.8': 0.01749409065235675, '0.85': 0.0022010124879528227, '0.9': 0.00024077662653887905, '0.95': nan}                                            NaN                           0.637983
+1   Loss_tensor(0.0616, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_290.pth                         {'0.5': 0.9813336694374656, '0.55': 0.875438997885323, '0.6': 0.6973116877747644, '0.65': 0.48394072018079, '0.7': 0.2429642805314616, '0.75': 0.06643949079219663, '0.8': 0.011451491422614025, '0.85': 0.0018142400141750695, '0.9': 0.00022555847624203563, '0.95': nan}                                            NaN                           0.638132
+2   Loss_tensor(0.0671, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_288.pth                       {'0.5': 0.9813677389354579, '0.55': 0.8709099445156485, '0.6': 0.6952402646257857, '0.65': 0.49050666429024453, '0.7': 0.23583200399226176, '0.75': 0.06511080173333875, '0.8': 0.01273475782761153, '0.85': 0.0018074335550012654, '0.9': 0.000246016058931271, '0.95': nan}                                            NaN                           0.639613
+3   Loss_tensor(0.0679, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_278.pth                     {'0.5': 0.9844827452465064, '0.55': 0.8907296593278851, '0.6': 0.7143800522376832, '0.65': 0.5040467569863922, '0.7': 0.24726577739163563, '0.75': 0.07052805395150923, '0.8': 0.012928814769335183, '0.85': 0.0017392486255631548, '0.9': 0.00022001073643705105, '0.95': nan}                                            NaN                           0.642187
+4   Loss_tensor(0.0730, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_268.pth                      {'0.5': 0.9767758002738153, '0.55': 0.8719294183573536, '0.6': 0.6891776171760574, '0.65': 0.4679689119567728, '0.7': 0.22000738139744563, '0.75': 0.05891445751509827, '0.8': 0.012906910556232203, '0.85': 0.001901761916833564, '0.9': 0.00016639399572016854, '0.95': nan}                                            NaN                           0.634275
+5   Loss_tensor(0.0792, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_256.pth                        {'0.5': 0.9802365942682253, '0.55': 0.8649570343768168, '0.6': 0.6820898985274786, '0.65': 0.4657169507256183, '0.7': 0.22415574600630284, '0.75': 0.06129721347470387, '0.8': 0.01162507244954479, '0.85': 0.001734169275548097, '0.9': 0.0001870290412892847, '0.95': nan}                                            NaN                           0.637123
+6   Loss_tensor(0.0807, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_296.pth                    {'0.5': 0.9843855606821951, '0.55': 0.8768142720203465, '0.6': 0.6983737709832127, '0.65': 0.48591913947791227, '0.7': 0.23126466039863852, '0.75': 0.06069995050805675, '0.8': 0.011758102869461998, '0.85': 0.0017236513778253772, '0.9': 0.00025504882810394584, '0.95': nan}                                            NaN                           0.640905
+7   Loss_tensor(0.0887, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_252.pth                         {'0.5': 0.9819962973095875, '0.55': 0.8785496406460801, '0.6': 0.703558391359127, '0.65': 0.4933936537143735, '0.7': 0.2376827275041611, '0.75': 0.07015963665858188, '0.8': 0.01364868194176216, '0.85': 0.0018750132423166264, '0.9': 0.0002721906594221706, '0.95': nan}                                            NaN                           0.638315
+8   Loss_tensor(0.0958, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_272.pth                    {'0.5': 0.9817645214812679, '0.55': 0.8773368805964857, '0.6': 0.7045222402319727, '0.65': 0.47631670971392637, '0.7': 0.23287447272792033, '0.75': 0.06580820190785754, '0.8': 0.011327272434169054, '0.85': 0.0015854289417798853, '0.9': 0.00021334675111023068, '0.95': nan}                                            NaN                           0.638973
+9   Loss_tensor(0.1150, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_284.pth                        {'0.5': 0.984758172116256, '0.55': 0.889808874319507, '0.6': 0.7201627164696935, '0.65': 0.5212719654716541, '0.7': 0.2576683585264296, '0.75': 0.07585350324030274, '0.8': 0.012220604093796092, '0.85': 0.0018309463767992506, '0.9': 0.00023286148272266905, '0.95': nan}                                            NaN                           0.641787
+11  Loss_tensor(0.1346, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_270.pth                       {'0.5': 0.9798740695081747, '0.55': 0.8691404249166887, '0.6': 0.6832472728307639, '0.65': 0.47539047966660386, '0.7': 0.2231495528711211, '0.75': 0.06134085719074546, '0.8': 0.01223085235269569, '0.85': 0.0015992146269105684, '0.9': 0.0001679556689124659, '0.95': nan}                                            NaN                           0.635350
+12  Loss_tensor(0.1383, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_282.pth                     {'0.5': 0.9797605992649966, '0.55': 0.8748310435637173, '0.6': 0.6883221229932148, '0.65': 0.4733817362384026, '0.7': 0.22283719206511388, '0.75': 0.06525067474082354, '0.8': 0.012677162836015943, '0.85': 0.0016817404786091117, '0.9': 0.00015967396358611543, '0.95': nan}                                            NaN                           0.638691
+13  Loss_tensor(0.1410, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_264.pth                     {'0.5': 0.9820350337035286, '0.55': 0.8764498836710841, '0.6': 0.6948444723864328, '0.65': 0.49324055479813717, '0.7': 0.23171991456250018, '0.75': 0.06907685028320168, '0.8': 0.012967546216238475, '0.85': 0.0018640476291645214, '0.9': 0.0002812424612832576, '0.95': nan}                                            NaN                           0.640451
+14  Loss_tensor(0.1432, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_262.pth                      {'0.5': 0.9839839392405609, '0.55': 0.8786424686297554, '0.6': 0.7051158698356006, '0.65': 0.5007842274590241, '0.7': 0.24367929026736668, '0.75': 0.07201996643548272, '0.8': 0.013545325432500494, '0.85': 0.0020102899645543354, '0.9': 0.0002773771599152947, '0.95': nan}                                            NaN                           0.642316
+15  Loss_tensor(0.1479, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_274.pth                       {'0.5': 0.9811367741230026, '0.55': 0.8716950598401949, '0.6': 0.6819464923702917, '0.65': 0.46532711549275907, '0.7': 0.218584525458289, '0.75': 0.06073206488001147, '0.8': 0.010900877796087692, '0.85': 0.0013245862538914597, '0.9': 0.0001841281481124811, '0.95': nan}                                            NaN                           0.636887
+16  Loss_tensor(0.1504, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_280.pth                     {'0.5': 0.982330497298334, '0.55': 0.8772182056660005, '0.6': 0.7020038393457291, '0.65': 0.48410355651272885, '0.7': 0.23180566874803815, '0.75': 0.06460325220688792, '0.8': 0.011425616383364697, '0.85': 0.0017292470007545893, '0.9': 0.00023920173347982752, '0.95': nan}                                            NaN                           0.639872
+18  Loss_tensor(0.1771, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_298.pth                      {'0.5': 0.9829128416440611, '0.55': 0.8707547186616913, '0.6': 0.6933691722143029, '0.65': 0.4700363135590624, '0.7': 0.2320619455284409, '0.75': 0.06353840788430916, '0.8': 0.011559315028623868, '0.85': 0.0016065601249475995, '0.9': 0.00015563643233676124, '0.95': nan}                                            NaN                           0.637864
+21  Loss_tensor(0.2170, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_266.pth                      {'0.5': 0.9786505699310555, '0.55': 0.871763754848377, '0.6': 0.6834028162105918, '0.65': 0.46960777701878204, '0.7': 0.21302252291725926, '0.75': 0.05342215156294932, '0.8': 0.010365259691176564, '0.85': 0.001727708113871445, '0.9': 0.00018570452609844117, '0.95': nan}                                            NaN                           0.633077
+22  Loss_tensor(0.2310, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_276.pth                     {'0.5': 0.9841296631607959, '0.55': 0.8840676989337655, '0.6': 0.7201689802056142, '0.65': 0.5162877926114395, '0.7': 0.26771351411676525, '0.75': 0.07609609046552711, '0.8': 0.012662161348176326, '0.85': 0.0018848904385272958, '0.9': 0.00024221638636839037, '0.95': nan}                                            NaN                           0.642491
+23  Loss_tensor(0.2553, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_294.pth                      {'0.5': 0.980062021958756, '0.55': 0.8653403029529994, '0.6': 0.6764902174645608, '0.65': 0.4650583651328478, '0.7': 0.21074274792074918, '0.75': 0.05292078185442375, '0.8': 0.010216182582244153, '0.85': 0.0014807092999072039, '0.9': 0.00013151150284626965, '0.95': nan}                                            NaN                           0.634460
+24  Loss_tensor(0.2791, device='cuda:0')_Model_Training_SFA_3D_Dataset_Hyundai_Rosbag_Labelling_Intern_with_New_Data_Input_800_Range_120_M_epoch_254.pth                    {'0.5': 0.9791397725889759, '0.55': 0.8662330298920089, '0.6': 0.6838419548322858, '0.65': 0.47183527586881024, '0.7': 0.22059284739356477, '0.75': 0.06407781050012168, '0.8': 0.012729826948590898, '0.85': 0.0017166893318036642, '0.9': 0.00027194269974253893, '0.95': nan}                                            NaN                           0.638539/usr/local/lib/python3.8/dist-packages/shapely/set_operations.py:133: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+

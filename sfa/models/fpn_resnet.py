@@ -182,7 +182,8 @@ class PoseResNet(nn.Module):
         # up_level2: torch.Size([b, 256, 28, 28])
         up_level2 = F.interpolate(self.conv_up_level1(concat_level1), scale_factor=2, mode='bilinear',
                                   align_corners=True)
-
+        #print( "Tensor Size of Upsampling Layer 2 is : " + torch.Size( up_level2[ 0 ] ))
+        #print( "Tensor Size of Layer FSA 3D Object Detection Layer 2 is : " + torch.Size( out_layer2[ 0 ] ))
         concat_level2 = torch.cat((up_level2, out_layer2), dim=1)
         # up_level3: torch.Size([b, 128, 56, 56]),
         up_level3 = F.interpolate(self.conv_up_level2(concat_level2), scale_factor=2, mode='bilinear',

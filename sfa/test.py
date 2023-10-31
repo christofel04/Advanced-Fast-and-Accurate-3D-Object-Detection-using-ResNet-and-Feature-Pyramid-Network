@@ -1,9 +1,11 @@
 """
 # -*- coding: utf-8 -*-
 -----------------------------------------------------------------------------------
-# Author: Nguyen Mau Dung
-# DoC: 2020.08.17
-# email: nguyenmaudung93.kstn@gmail.com
+# Author: Goenawan Christofel Rio
+# DoC: 2023.03.17
+# AI & Analytics Consultant at Hyundai Company
+# AI & Robotics Researcher at Korea Advanced Institute of Science and Technology
+# email: christofel.goenawan@kaist.ac.kr
 -----------------------------------------------------------------------------------
 # Description: Testing script
 """
@@ -66,15 +68,21 @@ def parse_test_configs():
                         help='the type of the test output (support image or video)')
     parser.add_argument('--output_video_fn', type=str, default='out_fpn_resnet_18', metavar='PATH',
                         help='the video filename if the output format is video')
-    parser.add_argument('--output-width', type=int, default=608,
+    parser.add_argument('--output-width', type=int, default=800,
                         help='the width of showing output, the height maybe vary')
+    
+    parser.add_argument("--is_using_Output_Prediction" , type=bool , default= True,
+                        help="Is Making Output Text File of SFA 3D Prediction Bounding Box or not...")
+    
+    parser.add_argument("--dataset_dir" , type=str , default= None,
+                        help="Dataset to Train SFA 3D Dataset Hyundai Race Rosbag File")
 
     configs = edict(vars(parser.parse_args()))
     configs.pin_memory = True
     configs.distributed = False  # For testing on 1 GPU only
 
-    configs.input_size = (608, 608)
-    configs.hm_size = (152, 152)
+    configs.input_size = (800, 800)
+    configs.hm_size = (200, 200)
     configs.down_ratio = 4
     configs.max_objects = 50
 
@@ -99,13 +107,17 @@ def parse_test_configs():
     ##############Dataset, Checkpoints, and results dir configs#########
     ####################################################################
     configs.root_dir = '../'
-    configs.dataset_dir = os.path.join(configs.root_dir, 'dataset', 'kitti')
+
+    if configs.dataset_dir == None :
+        configs.dataset_dir = os.path.join(configs.root_dir, 'dataset', 'kitti')
 
     if configs.save_test_output:
         configs.results_dir = os.path.join(configs.root_dir, 'results', configs.saved_fn)
         make_folder(configs.results_dir)
 
     return configs
+
+os.system( "sudo cp {} {} ".format( "./velodyne/" + str( str( int( str( Labelling_SFA_3D_Hyundai_Race_Dataset).replace( ".txt" , "" ))  - 1).zfill( 6 ) + ".bin" ), "/velodyne/" + str( Labelling_SFA_3D_Hyundai_Race_Dataset.replace( ".txt" , ".bin" )))
 
 
 if __name__ == '__main__':
@@ -125,9 +137,91 @@ if __name__ == '__main__':
     model.eval()
 
     test_dataloader = create_test_dataloader(configs)
+
+    configs.is_using_Output_Prediction = bool( configs.is_using_Output_Prediction )
+
+    if configs.is_using_Output_Prediction == True :
+
+        Name_File_of_Prediction_and_Ground_Truth_Output_Files = "Output_" + "Prediction" + "Ground_Truth_Dataset_SFA_3D_from_Bag.txt"
+
+        if os.path.exists( Name_File_of_Prediction_and_Ground_Truth_Output_Files ):
+
+            os.system( "sudo rm " + str( Name_File_of_Prediction_and_Ground_Truth_Output_Files ))
+
+            os.system( "sudo touch " + str( Name_File_of_Prediction_and_Ground_Truth_Output_Files ) )
+
+        with torch.no_grad():
+
+            
+            for batch_idx, batch_data in enumerate(test_dataloader):
+                metadatas, bev_maps, img_rgbs = batch_data
+                print( metadatas )
+                input_bev_maps = bev_maps.to(configs.device, non_blocking=True).float()
+                t1 = time_synchronized()
+                outputs = model(input_bev_maps)
+                outputs['hm_cen'] = _sigmoid(outputs['hm_cen'])
+                outputs['cen_offset'] = _sigmoid(outputs['cen_offset'])
+                # detections size (batch_size, K, 10)
+                detections = decode(outputs['hm_cen'], outputs['cen_offset'], outputs['direction'], outputs['z_coor'],
+                                    outputs['dim'], K=configs.K)
+                detections = detections.cpu().numpy().astype(np.float32)
+                detections = post_processing(detections, configs.num_classes, configs.down_ratio, configs.peak_thresh)
+                t2 = time_synchronized()
+
+                detections = detections[0]  # only first batch
+
+                img_path = metadatas['img_path'][0]
+
+                # Draw prediction in the image
+                bev_map = (bev_maps.squeeze().permute(1, 2, 0).numpy() * 255).astype(np.uint8)
+                bev_map = cv2.resize(bev_map, (cnf.BEV_WIDTH, cnf.BEV_HEIGHT))
+                bev_map = draw_predictions( img_path , bev_map, detections.copy(), configs.num_classes )
+
+                # Rotate the bev_map
+                bev_map = cv2.rotate(bev_map, cv2.ROTATE_180)
+
+                
+                img_rgb = img_rgbs[0].numpy()
+                img_rgb = cv2.resize(img_rgb, (img_rgb.shape[1], img_rgb.shape[0]))
+                img_bgr = cv2.cvtColor(img_rgb, cv2.COLOR_RGB2BGR)
+                calib = Calibration(img_path.replace(".png", ".txt").replace("image_2", "calib"))
+                kitti_dets = convert_det_to_real_values(detections)
+                if len(kitti_dets) > 0:
+                    kitti_dets[:, 1:] = lidar_to_camera_box(kitti_dets[:, 1:], calib.V2C, calib.R0, calib.P2)
+                    img_bgr = show_rgb_image_with_boxes(img_bgr, kitti_dets, calib)
+
+                out_img = merge_rgb_to_bev(img_bgr, bev_map, output_width=configs.output_width)
+
+                print('\tDone testing the {}th sample, time: {:.1f}ms, speed {:.2f}FPS'.format(batch_idx, (t2 - t1) * 1000,
+                                                                                            1 / (t2 - t1)))
+                
+                """
+                if configs.save_test_output:
+                    if configs.output_format == 'image':
+                        img_fn = os.path.basename(metadatas['img_path'][0])[:-4]
+                        cv2.imwrite(os.path.join(configs.results_dir, '{}.jpg'.format(img_fn)), out_img)
+                    elif configs.output_format == 'video':
+                        if out_cap is None:
+                            out_cap_h, out_cap_w = out_img.shape[:2]
+                            fourcc = cv2.VideoWriter_fourcc(*'MJPG')
+                            out_cap = cv2.VideoWriter(
+                                os.path.join(configs.results_dir, '{}.avi'.format(configs.output_video_fn)),
+                                fourcc, 30, (out_cap_w, out_cap_h))
+
+                        out_cap.write(out_img)
+                    else:
+                        raise TypeError
+
+                cv2.imshow('test-img', out_img)
+                print('\n[INFO] Press n to see the next sample >>> Press Esc to quit...\n')
+                """
+                #if cv2.waitKey(0) & 0xFF == 27:
+                #    break
+
     with torch.no_grad():
         for batch_idx, batch_data in enumerate(test_dataloader):
             metadatas, bev_maps, img_rgbs = batch_data
+            print( metadatas )
             input_bev_maps = bev_maps.to(configs.device, non_blocking=True).float()
             t1 = time_synchronized()
             outputs = model(input_bev_maps)
@@ -141,15 +235,18 @@ if __name__ == '__main__':
             t2 = time_synchronized()
 
             detections = detections[0]  # only first batch
+
+            img_path = metadatas['img_path'][0]
+
             # Draw prediction in the image
             bev_map = (bev_maps.squeeze().permute(1, 2, 0).numpy() * 255).astype(np.uint8)
             bev_map = cv2.resize(bev_map, (cnf.BEV_WIDTH, cnf.BEV_HEIGHT))
-            bev_map = draw_predictions(bev_map, detections.copy(), configs.num_classes)
+            bev_map = draw_predictions( img_path , bev_map, detections.copy(), configs.num_classes )
 
             # Rotate the bev_map
             bev_map = cv2.rotate(bev_map, cv2.ROTATE_180)
 
-            img_path = metadatas['img_path'][0]
+            
             img_rgb = img_rgbs[0].numpy()
             img_rgb = cv2.resize(img_rgb, (img_rgb.shape[1], img_rgb.shape[0]))
             img_bgr = cv2.cvtColor(img_rgb, cv2.COLOR_RGB2BGR)

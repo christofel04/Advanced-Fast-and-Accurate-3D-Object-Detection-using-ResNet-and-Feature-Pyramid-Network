@@ -19,14 +19,14 @@ if src_dir not in sys.path:
 import config.kitti_config as cnf
 
 
-def makeBEVMap(PointCloud_, boundary):
+def makeBEVMap(PointCloud_, boundary , is_Making_SFA_3D_Model_Without_Color ):
     Height = cnf.BEV_HEIGHT + 1
     Width = cnf.BEV_WIDTH + 1
 
     # Discretize Feature Map
     PointCloud = np.copy(PointCloud_)
-    PointCloud[:, 0] = np.int_(np.floor(PointCloud[:, 0] / cnf.DISCRETIZATION))
-    PointCloud[:, 1] = np.int_(np.floor(PointCloud[:, 1] / cnf.DISCRETIZATION) + Width / 2)
+    PointCloud[:, 0] = np.int_(np.floor(PointCloud[:, 0] / cnf.DISCRETIZATION + Height/ 2 )) ### ofel changed
+    PointCloud[:, 1] = np.int_(np.floor(PointCloud[:, 1] / cnf.DISCRETIZATION) + Width / 2) ### ofel changed
 
     # sort-3times
     sorted_indices = np.lexsort((-PointCloud[:, 2], PointCloud[:, 1], PointCloud[:, 0]))
@@ -50,7 +50,28 @@ def makeBEVMap(PointCloud_, boundary):
     RGB_Map = np.zeros((3, Height - 1, Width - 1))
     RGB_Map[2, :, :] = densityMap[:cnf.BEV_HEIGHT, :cnf.BEV_WIDTH]  # r_map
     RGB_Map[1, :, :] = heightMap[:cnf.BEV_HEIGHT, :cnf.BEV_WIDTH]  # g_map
-    RGB_Map[0, :, :] = intensityMap[:cnf.BEV_HEIGHT, :cnf.BEV_WIDTH]  # b_map
+    if is_Making_SFA_3D_Model_Without_Color == True :
+        RGB_Map[0, :, :] = np.zeros( intensityMap[:cnf.BEV_HEIGHT, :cnf.BEV_WIDTH].shape ) # b_map
+        
+    else :
+                
+        RGB_Map[0, :, :] = intensityMap[:cnf.BEV_HEIGHT, :cnf.BEV_WIDTH]  # b_map
+
+    #Upper_Visualization_of_RGB_Map_Bounding_Box_Prediction = RGB_Map[ : , : 608 , : ]
+
+    """
+
+    if RGB_Map.shape[ 1 ] == 1216 :
+
+        print( "Make Visualization of Bounding Box SFA 3D Prediction...")
+
+        RGB_Map[ : , : 608 , : ] = RGB_Map[ : , 608 : , : ]
+
+        RGB_Map[ : , 608 : , : ] = Upper_Visualization_of_RGB_Map_Bounding_Box_Prediction
+
+    print( RGB_Map.shape )
+
+    """
 
     return RGB_Map
 
@@ -79,9 +100,23 @@ def get_corners(x, y, w, l, yaw):
     return bev_corners
 
 
-def drawRotatedBox(img, x, y, w, l, yaw, color):
+def drawRotatedBox(img_path, img, x, y, w, l, yaw, color , writing_mode = None , confidence_score_prediction = 100 ):
+    #x = ( x + img.shape[ 0 ]/2)%img.shape[ 0 ]
     bev_corners = get_corners(x, y, w, l, yaw)
+    #print(bev_corners)
+    #print( "Image Shape is : " + str( img.shape ))
     corners_int = bev_corners.reshape(-1, 1, 2).astype(int)
     cv2.polylines(img, [corners_int], True, color, 2)
     corners_int = bev_corners.reshape(-1, 2).astype(int)
+    
+    bev_corners = bev_corners.astype( int )
+    try :
+        f = open( "Output_" + writing_mode + "Ground_Truth_Dataset_SFA_3D_from_Bag.txt" , "a+")
+        f.write( "{} {} {} {} {} {} {} {} {} {}\n".format( img_path  ,  confidence_score_prediction , bev_corners[0, 0], bev_corners[0, 1], bev_corners[1, 0], bev_corners[1, 1] , bev_corners[ 2 ][ 0 ] , bev_corners[ 2 ][ 1 ] , bev_corners[ 3 ][ 0 ] , bev_corners[ 3 ][ 1 ]) )
+
+    except :
+
+        print( 'There is no Rosbag Hyundai Race Bounding Box Files')
     cv2.line(img, (corners_int[0, 0], corners_int[0, 1]), (corners_int[3, 0], corners_int[3, 1]), (255, 255, 0), 2)
+    #cv2.line(img, (-100, -100), (100, 100), (255, 0, 0), 2)
+

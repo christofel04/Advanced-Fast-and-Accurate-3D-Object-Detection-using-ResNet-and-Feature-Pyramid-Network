@@ -1,9 +1,11 @@
 """
 # -*- coding: utf-8 -*-
 -----------------------------------------------------------------------------------
-# Author: Nguyen Mau Dung
-# DoC: 2020.08.17
-# email: nguyenmaudung93.kstn@gmail.com
+# Author: Goenawan Christofel Rio
+# DoC: 2023.03.17
+# AI & Analytics Consultant at Hyundai Company
+# AI & Robotics Researcher at Korea Advanced Institute of Science and Technology
+# email: christofel.goenawan@kaist.ac.kr
 -----------------------------------------------------------------------------------
 # Description: This script for the KITTI dataset
 """

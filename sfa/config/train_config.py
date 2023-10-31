@@ -1,9 +1,11 @@
 """
 # -*- coding: utf-8 -*-
 -----------------------------------------------------------------------------------
-# Author: Nguyen Mau Dung
-# DoC: 2020.08.17
-# email: nguyenmaudung93.kstn@gmail.com
+# Author: Goenawan Christofel Rio
+# DoC: 2023.03.17
+# AI & Analytics Consultant at Hyundai Company
+# AI & Robotics Researcher at Korea Advanced Institute of Science and Technology
+# email: christofel.goenawan@kaist.ac.kr
 -----------------------------------------------------------------------------------
 # Description: The configurations of the project will be defined here
 """
@@ -14,6 +16,7 @@ import argparse
 import torch
 from easydict import EasyDict as edict
 
+SFA_3D_INPUT_SIZE = 800
 
 def parse_train_configs():
     parser = argparse.ArgumentParser(description='The Implementation using PyTorch')
@@ -51,7 +54,7 @@ def parse_train_configs():
                         help='print frequency (default: 50)')
     parser.add_argument('--tensorboard_freq', type=int, default=50, metavar='N',
                         help='frequency of saving tensorboard (default: 50)')
-    parser.add_argument('--checkpoint_freq', type=int, default=2, metavar='N',
+    parser.add_argument('--checkpoint_freq', type=int, default=1, metavar='N',
                         help='frequency of saving checkpoints (default: 5)')
     ####################################################################
     ##############     Training strategy            ####################
@@ -108,8 +111,12 @@ def parse_train_configs():
     parser.add_argument('--resume_path', type=str, default=None, metavar='PATH',
                         help='the path of the resumed checkpoint')
     parser.add_argument('--K', type=int, default=50,
-                        help='the number of top K')
-
+                        help='the number of top K')                       
+    parser.add_argument('--dataset_dir', type=str, default=None,
+                        help='The Dataset of SFA 3D Dataset')
+    parser.add_argument('--is_Training_SFA_3D_Model_Without_Color', type=bool, default=False,
+                        help='is Training SFA 3D Model Without Color')                      
+                        
     configs = edict(vars(parser.parse_args()))
 
     ####################################################################
@@ -119,8 +126,8 @@ def parse_train_configs():
     configs.ngpus_per_node = torch.cuda.device_count()
 
     configs.pin_memory = True
-    configs.input_size = (608, 608)
-    configs.hm_size = (152, 152)
+    configs.input_size = ( SFA_3D_INPUT_SIZE, SFA_3D_INPUT_SIZE )
+    configs.hm_size = ( SFA_3D_INPUT_SIZE // 4,  SFA_3D_INPUT_SIZE // 4 )
     configs.down_ratio = 4
     configs.max_objects = 50
 
@@ -145,7 +152,8 @@ def parse_train_configs():
     ####################################################################
     ############## Dataset, logs, Checkpoints dir ######################
     ####################################################################
-    configs.dataset_dir = os.path.join(configs.root_dir, 'dataset', 'kitti')
+    if configs.dataset_dir == None :
+    	configs.dataset_dir = os.path.join(configs.root_dir, 'dataset', 'kitti')
     configs.checkpoints_dir = os.path.join(configs.root_dir, 'checkpoints', configs.saved_fn)
     configs.logs_dir = os.path.join(configs.root_dir, 'logs', configs.saved_fn)
 

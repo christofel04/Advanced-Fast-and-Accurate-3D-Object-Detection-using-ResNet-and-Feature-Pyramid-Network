@@ -55,6 +55,10 @@ def _neg_loss(pred, gt, alpha=2, beta=4):
 
     loss = 0
 
+    #print( "Prediction Shape is : " + str( pred.shape ))
+
+    #print( "Position Index Focal Loss Matrics is : " + str( pos_inds.shape ))
+
     pos_loss = torch.log(pred) * torch.pow(1 - pred, alpha) * pos_inds
     neg_loss = torch.log(1 - pred) * torch.pow(pred, alpha) * neg_weights * neg_inds
 
