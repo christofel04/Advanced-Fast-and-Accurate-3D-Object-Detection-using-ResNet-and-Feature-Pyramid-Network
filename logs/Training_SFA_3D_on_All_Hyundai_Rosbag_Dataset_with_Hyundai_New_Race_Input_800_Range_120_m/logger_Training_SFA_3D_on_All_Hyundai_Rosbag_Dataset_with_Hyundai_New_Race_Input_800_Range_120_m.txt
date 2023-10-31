@@ -582,3 +582,293 @@ Train - Epoch: [0/300][6707/6808]	Time  0.187 ( 0.188)	Data  0.001 ( 0.002)	Loss
 Train - Epoch: [0/300][6757/6808]	Time  0.170 ( 0.187)	Data  0.001 ( 0.002)	Loss 1.5640e+00 (4.3489e+00)
 2023-10-31 18:45:36,268: logger.py - info(), at Line 51:INFO:
 Train - Epoch: [0/300][6807/6808]	Time  0.272 ( 0.187)	Data  0.000 ( 0.002)	Loss 1.0243e+00 (4.3274e+00)
+2023-10-31 21:17:56,224: logger.py - info(), at Line 51:INFO:
+>>> Created a new logger
+2023-10-31 21:17:56,224: logger.py - info(), at Line 51:INFO:
+>>> configs: {'seed': 2020, 'saved_fn': 'Training_SFA_3D_on_All_Hyundai_Rosbag_Dataset_with_Hyundai_New_Race_Input_800_Range_120_m', 'root_dir': '../', 'arch': 'fpn_resnet_18', 'pretrained_path': None, 'hflip_prob': 0.5, 'no_val': False, 'num_samples': None, 'num_workers': 4, 'batch_size': 4, 'print_freq': 50, 'tensorboard_freq': 50, 'checkpoint_freq': 1, 'start_epoch': 0, 'num_epochs': 300, 'lr_type': 'cosin', 'lr': 0.0005, 'minimum_lr': 1e-07, 'momentum': 0.949, 'weight_decay': 0.0, 'optimizer_type': 'adam', 'steps': [150, 180], 'world_size': -1, 'rank': -1, 'dist_url': 'tcp://127.0.0.1:29500', 'dist_backend': 'nccl', 'gpu_idx': 0, 'no_cuda': False, 'multiprocessing_distributed': False, 'evaluate': False, 'resume_path': None, 'K': 50, 'dataset_dir': '/media/ofel04/eb36cbe5-b485-4b41-a943-aa0452f90da3/home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data_with_Hyundai_New_Race/', 'is_Training_SFA_3D_Model_Without_Color': False, 'device': device(type='cuda', index=0), 'ngpus_per_node': 1, 'pin_memory': True, 'input_size': [800, 800], 'hm_size': [200, 200], 'down_ratio': 4, 'max_objects': 50, 'imagenet_pretrained': True, 'head_conv': 64, 'num_classes': 3, 'num_center_offset': 2, 'num_z': 1, 'num_dim': 3, 'num_direction': 2, 'heads': {'hm_cen': 3, 'cen_offset': 2, 'direction': 2, 'z_coor': 1, 'dim': 3}, 'num_input_features': 4, 'checkpoints_dir': '../checkpoints/Training_SFA_3D_on_All_Hyundai_Rosbag_Dataset_with_Hyundai_New_Race_Input_800_Range_120_m', 'logs_dir': '../logs/Training_SFA_3D_on_All_Hyundai_Rosbag_Dataset_with_Hyundai_New_Race_Input_800_Range_120_m', 'distributed': False, 'subdivisions': 16, 'is_master_node': True}
+2023-10-31 21:17:59,013: logger.py - info(), at Line 51:INFO:
+number of trained parameters of the model: 12728353
+2023-10-31 21:17:59,013: logger.py - info(), at Line 51:INFO:
+>>> Loading dataset & getting dataloader...
+2023-10-31 21:17:59,021: logger.py - info(), at Line 51:INFO:
+number of batches in training set: 6808
+2023-10-31 21:17:59,021: logger.py - info(), at Line 51:INFO:
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+2023-10-31 21:17:59,021: logger.py - info(), at Line 51:INFO:
+=================================== 0/300 ===================================
+2023-10-31 21:17:59,021: logger.py - info(), at Line 51:INFO:
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+2023-10-31 21:17:59,021: logger.py - info(), at Line 51:INFO:
+>>> Epoch: [0/300]
+2023-10-31 21:18:04,902: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][   7/6808]	Time  0.201 ( 0.730)	Data  0.001 ( 0.128)	Loss 5.6833e+01 (5.9694e+01)
+2023-10-31 21:18:15,851: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][  57/6808]	Time  0.221 ( 0.289)	Data  0.001 ( 0.020)	Loss 6.0548e+01 (5.4372e+01)
+2023-10-31 21:18:26,969: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 107/6808]	Time  0.211 ( 0.258)	Data  0.001 ( 0.011)	Loss 3.6406e+01 (4.9656e+01)
+2023-10-31 21:18:37,815: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 157/6808]	Time  0.225 ( 0.245)	Data  0.001 ( 0.008)	Loss 3.1617e+01 (4.5812e+01)
+2023-10-31 21:18:48,617: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 207/6808]	Time  0.233 ( 0.238)	Data  0.001 ( 0.007)	Loss 3.3438e+01 (4.2264e+01)
+2023-10-31 21:18:59,502: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 257/6808]	Time  0.217 ( 0.234)	Data  0.001 ( 0.006)	Loss 2.3607e+01 (3.9345e+01)
+2023-10-31 21:19:10,220: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 307/6808]	Time  0.214 ( 0.231)	Data  0.000 ( 0.005)	Loss 2.0559e+01 (3.6794e+01)
+2023-10-31 21:19:20,976: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 357/6808]	Time  0.209 ( 0.229)	Data  0.001 ( 0.005)	Loss 1.9596e+01 (3.4465e+01)
+2023-10-31 21:19:31,785: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 407/6808]	Time  0.240 ( 0.227)	Data  0.001 ( 0.004)	Loss 1.7042e+01 (3.2389e+01)
+2023-10-31 21:19:42,537: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 457/6808]	Time  0.215 ( 0.226)	Data  0.001 ( 0.004)	Loss 1.4010e+01 (3.0482e+01)
+2023-10-31 21:19:53,473: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 507/6808]	Time  0.229 ( 0.225)	Data  0.001 ( 0.004)	Loss 1.0972e+01 (2.8741e+01)
+2023-10-31 21:20:04,222: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 557/6808]	Time  0.240 ( 0.224)	Data  0.001 ( 0.004)	Loss 1.1177e+01 (2.7196e+01)
+2023-10-31 21:20:14,941: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 607/6808]	Time  0.223 ( 0.223)	Data  0.001 ( 0.004)	Loss 9.4538e+00 (2.5813e+01)
+2023-10-31 21:20:25,716: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 657/6808]	Time  0.204 ( 0.223)	Data  0.001 ( 0.003)	Loss 9.6646e+00 (2.4574e+01)
+2023-10-31 21:20:36,441: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 707/6808]	Time  0.197 ( 0.222)	Data  0.001 ( 0.003)	Loss 8.7864e+00 (2.3463e+01)
+2023-10-31 21:20:47,286: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 757/6808]	Time  0.214 ( 0.222)	Data  0.001 ( 0.003)	Loss 8.0453e+00 (2.2453e+01)
+2023-10-31 21:20:58,235: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 807/6808]	Time  0.223 ( 0.222)	Data  0.009 ( 0.003)	Loss 7.2248e+00 (2.1534e+01)
+2023-10-31 21:21:08,977: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 857/6808]	Time  0.214 ( 0.221)	Data  0.001 ( 0.003)	Loss 6.7545e+00 (2.0688e+01)
+2023-10-31 21:21:19,661: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 907/6808]	Time  0.244 ( 0.221)	Data  0.002 ( 0.003)	Loss 6.2638e+00 (1.9902e+01)
+2023-10-31 21:21:30,622: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 957/6808]	Time  0.232 ( 0.221)	Data  0.017 ( 0.003)	Loss 5.9621e+00 (1.9173e+01)
+2023-10-31 21:21:41,499: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1007/6808]	Time  0.210 ( 0.221)	Data  0.001 ( 0.003)	Loss 4.9512e+00 (1.8487e+01)
+2023-10-31 21:21:52,252: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1057/6808]	Time  0.209 ( 0.220)	Data  0.001 ( 0.003)	Loss 5.1327e+00 (1.7853e+01)
+2023-10-31 21:22:03,025: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1107/6808]	Time  0.209 ( 0.220)	Data  0.001 ( 0.003)	Loss 4.4146e+00 (1.7263e+01)
+2023-10-31 21:22:13,810: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1157/6808]	Time  0.214 ( 0.220)	Data  0.002 ( 0.003)	Loss 4.3716e+00 (1.6710e+01)
+2023-10-31 21:22:24,480: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1207/6808]	Time  0.204 ( 0.220)	Data  0.001 ( 0.003)	Loss 3.5460e+00 (1.6192e+01)
+2023-10-31 21:22:35,215: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1257/6808]	Time  0.214 ( 0.219)	Data  0.001 ( 0.003)	Loss 3.5023e+00 (1.5705e+01)
+2023-10-31 21:22:46,075: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1307/6808]	Time  0.210 ( 0.219)	Data  0.001 ( 0.003)	Loss 3.2854e+00 (1.5245e+01)
+2023-10-31 21:22:57,094: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1357/6808]	Time  0.217 ( 0.219)	Data  0.001 ( 0.003)	Loss 3.6783e+00 (1.4806e+01)
+2023-10-31 21:23:07,860: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1407/6808]	Time  0.230 ( 0.219)	Data  0.001 ( 0.003)	Loss 3.7613e+00 (1.4399e+01)
+2023-10-31 21:23:18,574: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1457/6808]	Time  0.198 ( 0.219)	Data  0.001 ( 0.003)	Loss 3.2280e+00 (1.4011e+01)
+2023-10-31 21:23:29,643: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1507/6808]	Time  0.219 ( 0.219)	Data  0.001 ( 0.003)	Loss 2.7599e+00 (1.3652e+01)
+2023-10-31 21:23:40,636: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1557/6808]	Time  0.227 ( 0.219)	Data  0.005 ( 0.003)	Loss 3.2435e+00 (1.3309e+01)
+2023-10-31 21:23:51,510: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1607/6808]	Time  0.223 ( 0.219)	Data  0.000 ( 0.003)	Loss 3.0238e+00 (1.2981e+01)
+2023-10-31 21:24:02,584: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1657/6808]	Time  0.216 ( 0.219)	Data  0.001 ( 0.003)	Loss 2.6673e+00 (1.2673e+01)
+2023-10-31 21:24:13,513: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1707/6808]	Time  0.221 ( 0.219)	Data  0.001 ( 0.003)	Loss 2.0405e+00 (1.2379e+01)
+2023-10-31 21:24:24,396: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1757/6808]	Time  0.203 ( 0.219)	Data  0.001 ( 0.002)	Loss 1.9800e+00 (1.2095e+01)
+2023-10-31 21:24:35,277: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1807/6808]	Time  0.218 ( 0.219)	Data  0.002 ( 0.002)	Loss 2.8943e+00 (1.1827e+01)
+2023-10-31 21:24:46,142: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1857/6808]	Time  0.225 ( 0.219)	Data  0.008 ( 0.002)	Loss 2.6876e+00 (1.1572e+01)
+2023-10-31 21:24:57,185: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1907/6808]	Time  0.217 ( 0.219)	Data  0.001 ( 0.002)	Loss 2.0063e+00 (1.1327e+01)
+2023-10-31 21:25:08,089: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1957/6808]	Time  0.214 ( 0.219)	Data  0.002 ( 0.002)	Loss 2.4031e+00 (1.1095e+01)
+2023-10-31 21:25:19,181: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2007/6808]	Time  0.248 ( 0.219)	Data  0.032 ( 0.002)	Loss 2.6072e+00 (1.0874e+01)
+2023-10-31 21:25:30,214: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2057/6808]	Time  0.213 ( 0.219)	Data  0.001 ( 0.002)	Loss 1.5750e+00 (1.0663e+01)
+2023-10-31 21:25:41,008: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2107/6808]	Time  0.208 ( 0.219)	Data  0.001 ( 0.002)	Loss 2.1492e+00 (1.0459e+01)
+2023-10-31 21:25:51,925: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2157/6808]	Time  0.203 ( 0.219)	Data  0.001 ( 0.002)	Loss 1.7857e+00 (1.0262e+01)
+2023-10-31 21:26:02,865: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2207/6808]	Time  0.231 ( 0.219)	Data  0.001 ( 0.002)	Loss 2.7487e+00 (1.0078e+01)
+2023-10-31 21:26:13,705: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2257/6808]	Time  0.211 ( 0.219)	Data  0.001 ( 0.002)	Loss 1.6008e+00 (9.9017e+00)
+2023-10-31 21:26:24,668: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2307/6808]	Time  0.235 ( 0.219)	Data  0.001 ( 0.002)	Loss 2.3387e+00 (9.7294e+00)
+2023-10-31 21:26:36,225: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2357/6808]	Time  0.221 ( 0.219)	Data  0.002 ( 0.002)	Loss 2.2560e+00 (9.5668e+00)
+2023-10-31 21:26:47,502: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2407/6808]	Time  0.209 ( 0.219)	Data  0.001 ( 0.002)	Loss 2.0275e+00 (9.4079e+00)
+2023-10-31 21:26:58,517: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2457/6808]	Time  0.210 ( 0.219)	Data  0.000 ( 0.002)	Loss 2.1780e+00 (9.2546e+00)
+2023-10-31 21:27:10,100: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2507/6808]	Time  0.213 ( 0.220)	Data  0.001 ( 0.002)	Loss 1.8257e+00 (9.1096e+00)
+2023-10-31 21:27:21,538: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2557/6808]	Time  0.217 ( 0.220)	Data  0.001 ( 0.002)	Loss 2.3034e+00 (8.9684e+00)
+2023-10-31 21:27:33,016: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2607/6808]	Time  0.238 ( 0.220)	Data  0.001 ( 0.002)	Loss 1.7161e+00 (8.8302e+00)
+2023-10-31 21:27:44,268: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2657/6808]	Time  0.259 ( 0.220)	Data  0.001 ( 0.002)	Loss 2.1700e+00 (8.6982e+00)
+2023-10-31 21:27:55,771: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2707/6808]	Time  0.206 ( 0.220)	Data  0.001 ( 0.002)	Loss 1.9917e+00 (8.5710e+00)
+2023-10-31 21:28:07,863: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2757/6808]	Time  0.249 ( 0.221)	Data  0.000 ( 0.002)	Loss 1.8509e+00 (8.4491e+00)
+2023-10-31 21:28:27,868: logger.py - info(), at Line 51:INFO:
+>>> Created a new logger
+2023-10-31 21:28:27,868: logger.py - info(), at Line 51:INFO:
+>>> configs: {'seed': 2020, 'saved_fn': 'Training_SFA_3D_on_All_Hyundai_Rosbag_Dataset_with_Hyundai_New_Race_Input_800_Range_120_m', 'root_dir': '../', 'arch': 'fpn_resnet_18', 'pretrained_path': None, 'hflip_prob': 0.5, 'no_val': False, 'num_samples': None, 'num_workers': 4, 'batch_size': 4, 'print_freq': 50, 'tensorboard_freq': 50, 'checkpoint_freq': 1, 'start_epoch': 0, 'num_epochs': 300, 'lr_type': 'cosin', 'lr': 0.0005, 'minimum_lr': 1e-07, 'momentum': 0.949, 'weight_decay': 0.0, 'optimizer_type': 'adam', 'steps': [150, 180], 'world_size': -1, 'rank': -1, 'dist_url': 'tcp://127.0.0.1:29500', 'dist_backend': 'nccl', 'gpu_idx': 0, 'no_cuda': False, 'multiprocessing_distributed': False, 'evaluate': False, 'resume_path': None, 'K': 50, 'dataset_dir': '/media/ofel04/eb36cbe5-b485-4b41-a943-aa0452f90da3/home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data_with_Hyundai_New_Race/', 'is_Training_SFA_3D_Model_Without_Color': False, 'device': device(type='cuda', index=0), 'ngpus_per_node': 1, 'pin_memory': True, 'input_size': [800, 800], 'hm_size': [200, 200], 'down_ratio': 4, 'max_objects': 50, 'imagenet_pretrained': True, 'head_conv': 64, 'num_classes': 3, 'num_center_offset': 2, 'num_z': 1, 'num_dim': 3, 'num_direction': 2, 'heads': {'hm_cen': 3, 'cen_offset': 2, 'direction': 2, 'z_coor': 1, 'dim': 3}, 'num_input_features': 4, 'checkpoints_dir': '../checkpoints/Training_SFA_3D_on_All_Hyundai_Rosbag_Dataset_with_Hyundai_New_Race_Input_800_Range_120_m', 'logs_dir': '../logs/Training_SFA_3D_on_All_Hyundai_Rosbag_Dataset_with_Hyundai_New_Race_Input_800_Range_120_m', 'distributed': False, 'subdivisions': 16, 'is_master_node': True}
+2023-10-31 21:28:30,782: logger.py - info(), at Line 51:INFO:
+number of trained parameters of the model: 12728353
+2023-10-31 21:28:30,782: logger.py - info(), at Line 51:INFO:
+>>> Loading dataset & getting dataloader...
+2023-10-31 21:28:30,790: logger.py - info(), at Line 51:INFO:
+number of batches in training set: 6808
+2023-10-31 21:29:39,519: logger.py - info(), at Line 51:INFO:
+>>> Created a new logger
+2023-10-31 21:29:39,519: logger.py - info(), at Line 51:INFO:
+>>> configs: {'seed': 2020, 'saved_fn': 'Training_SFA_3D_on_All_Hyundai_Rosbag_Dataset_with_Hyundai_New_Race_Input_800_Range_120_m', 'root_dir': '../', 'arch': 'fpn_resnet_18', 'pretrained_path': None, 'hflip_prob': 0.5, 'no_val': False, 'num_samples': None, 'num_workers': 4, 'batch_size': 4, 'print_freq': 50, 'tensorboard_freq': 50, 'checkpoint_freq': 1, 'start_epoch': 0, 'num_epochs': 300, 'lr_type': 'cosin', 'lr': 0.0005, 'minimum_lr': 1e-07, 'momentum': 0.949, 'weight_decay': 0.0, 'optimizer_type': 'adam', 'steps': [150, 180], 'world_size': -1, 'rank': -1, 'dist_url': 'tcp://127.0.0.1:29500', 'dist_backend': 'nccl', 'gpu_idx': 0, 'no_cuda': False, 'multiprocessing_distributed': False, 'evaluate': False, 'resume_path': None, 'K': 50, 'dataset_dir': '/media/ofel04/eb36cbe5-b485-4b41-a943-aa0452f90da3/home/ofel04/3D_Labelling_Result_from_Bag_Files_All_Rosbag_Data_with_Hyundai_New_Race/', 'is_Training_SFA_3D_Model_Without_Color': False, 'device': device(type='cuda', index=0), 'ngpus_per_node': 1, 'pin_memory': True, 'input_size': [800, 800], 'hm_size': [200, 200], 'down_ratio': 4, 'max_objects': 50, 'imagenet_pretrained': True, 'head_conv': 64, 'num_classes': 3, 'num_center_offset': 2, 'num_z': 1, 'num_dim': 3, 'num_direction': 2, 'heads': {'hm_cen': 3, 'cen_offset': 2, 'direction': 2, 'z_coor': 1, 'dim': 3}, 'num_input_features': 4, 'checkpoints_dir': '../checkpoints/Training_SFA_3D_on_All_Hyundai_Rosbag_Dataset_with_Hyundai_New_Race_Input_800_Range_120_m', 'logs_dir': '../logs/Training_SFA_3D_on_All_Hyundai_Rosbag_Dataset_with_Hyundai_New_Race_Input_800_Range_120_m', 'distributed': False, 'subdivisions': 16, 'is_master_node': True}
+2023-10-31 21:29:41,100: logger.py - info(), at Line 51:INFO:
+number of trained parameters of the model: 12728353
+2023-10-31 21:29:41,100: logger.py - info(), at Line 51:INFO:
+>>> Loading dataset & getting dataloader...
+2023-10-31 21:29:41,106: logger.py - info(), at Line 51:INFO:
+number of batches in training set: 6808
+2023-10-31 21:48:45,995: logger.py - info(), at Line 51:INFO:
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+2023-10-31 21:48:45,995: logger.py - info(), at Line 51:INFO:
+=================================== 0/300 ===================================
+2023-10-31 21:48:45,995: logger.py - info(), at Line 51:INFO:
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+2023-10-31 21:48:45,995: logger.py - info(), at Line 51:INFO:
+>>> Epoch: [0/300]
+2023-10-31 21:48:52,070: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][   7/6808]	Time  0.172 ( 0.750)	Data  0.000 ( 0.153)	Loss 5.6833e+01 (5.9694e+01)
+2023-10-31 21:49:00,786: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][  57/6808]	Time  0.167 ( 0.254)	Data  0.000 ( 0.022)	Loss 6.0543e+01 (5.4371e+01)
+2023-10-31 21:49:11,034: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 107/6808]	Time  0.212 ( 0.231)	Data  0.001 ( 0.012)	Loss 3.6406e+01 (4.9655e+01)
+2023-10-31 21:49:22,004: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 157/6808]	Time  0.202 ( 0.227)	Data  0.001 ( 0.009)	Loss 3.1617e+01 (4.5811e+01)
+2023-10-31 21:49:32,833: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 207/6808]	Time  0.221 ( 0.225)	Data  0.000 ( 0.007)	Loss 3.3439e+01 (4.2263e+01)
+2023-10-31 21:49:43,792: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 257/6808]	Time  0.222 ( 0.224)	Data  0.001 ( 0.006)	Loss 2.3607e+01 (3.9345e+01)
+2023-10-31 21:49:54,567: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 307/6808]	Time  0.219 ( 0.222)	Data  0.001 ( 0.005)	Loss 2.0559e+01 (3.6793e+01)
+2023-10-31 21:50:05,297: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 357/6808]	Time  0.220 ( 0.221)	Data  0.001 ( 0.005)	Loss 1.9596e+01 (3.4465e+01)
+2023-10-31 21:50:16,072: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 407/6808]	Time  0.209 ( 0.221)	Data  0.001 ( 0.004)	Loss 1.7043e+01 (3.2389e+01)
+2023-10-31 21:50:26,812: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 457/6808]	Time  0.208 ( 0.220)	Data  0.001 ( 0.004)	Loss 1.4010e+01 (3.0482e+01)
+2023-10-31 21:50:37,831: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 507/6808]	Time  0.238 ( 0.220)	Data  0.004 ( 0.004)	Loss 1.0972e+01 (2.8741e+01)
+2023-10-31 21:50:48,590: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 557/6808]	Time  0.205 ( 0.220)	Data  0.001 ( 0.004)	Loss 1.1177e+01 (2.7196e+01)
+2023-10-31 21:50:59,512: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 607/6808]	Time  0.210 ( 0.219)	Data  0.001 ( 0.004)	Loss 9.4536e+00 (2.5813e+01)
+2023-10-31 21:51:10,308: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 657/6808]	Time  0.222 ( 0.219)	Data  0.001 ( 0.004)	Loss 9.6637e+00 (2.4574e+01)
+2023-10-31 21:51:21,093: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 707/6808]	Time  0.215 ( 0.219)	Data  0.001 ( 0.004)	Loss 8.7849e+00 (2.3463e+01)
+2023-10-31 21:51:31,939: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 757/6808]	Time  0.210 ( 0.219)	Data  0.001 ( 0.003)	Loss 8.0442e+00 (2.2453e+01)
+2023-10-31 21:51:42,826: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 807/6808]	Time  0.209 ( 0.219)	Data  0.001 ( 0.003)	Loss 7.2225e+00 (2.1534e+01)
+2023-10-31 21:51:53,786: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 857/6808]	Time  0.219 ( 0.219)	Data  0.001 ( 0.003)	Loss 6.7530e+00 (2.0687e+01)
+2023-10-31 21:52:04,450: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 907/6808]	Time  0.224 ( 0.218)	Data  0.003 ( 0.003)	Loss 6.2626e+00 (1.9902e+01)
+2023-10-31 21:52:15,219: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][ 957/6808]	Time  0.198 ( 0.218)	Data  0.001 ( 0.003)	Loss 5.9594e+00 (1.9172e+01)
+2023-10-31 21:52:26,046: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1007/6808]	Time  0.251 ( 0.218)	Data  0.001 ( 0.003)	Loss 4.9514e+00 (1.8487e+01)
+2023-10-31 21:52:36,795: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1057/6808]	Time  0.214 ( 0.218)	Data  0.001 ( 0.003)	Loss 5.1338e+00 (1.7853e+01)
+2023-10-31 21:52:47,583: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1107/6808]	Time  0.212 ( 0.218)	Data  0.001 ( 0.003)	Loss 4.4177e+00 (1.7262e+01)
+2023-10-31 21:52:58,448: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1157/6808]	Time  0.202 ( 0.218)	Data  0.001 ( 0.003)	Loss 4.3715e+00 (1.6710e+01)
+2023-10-31 21:53:09,221: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1207/6808]	Time  0.203 ( 0.218)	Data  0.001 ( 0.003)	Loss 3.5455e+00 (1.6191e+01)
+2023-10-31 21:53:20,081: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1257/6808]	Time  0.208 ( 0.218)	Data  0.001 ( 0.003)	Loss 3.4993e+00 (1.5704e+01)
+2023-10-31 21:53:30,973: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1307/6808]	Time  0.217 ( 0.218)	Data  0.001 ( 0.003)	Loss 3.2785e+00 (1.5244e+01)
+2023-10-31 21:53:42,045: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1357/6808]	Time  0.215 ( 0.218)	Data  0.001 ( 0.003)	Loss 3.6648e+00 (1.4806e+01)
+2023-10-31 21:53:52,790: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1407/6808]	Time  0.233 ( 0.218)	Data  0.001 ( 0.003)	Loss 3.7619e+00 (1.4398e+01)
+2023-10-31 21:54:03,604: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1457/6808]	Time  0.224 ( 0.218)	Data  0.001 ( 0.003)	Loss 3.2206e+00 (1.4010e+01)
+2023-10-31 21:54:14,602: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1507/6808]	Time  0.230 ( 0.218)	Data  0.001 ( 0.003)	Loss 2.7466e+00 (1.3650e+01)
+2023-10-31 21:54:25,653: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1557/6808]	Time  0.213 ( 0.218)	Data  0.001 ( 0.003)	Loss 3.2291e+00 (1.3306e+01)
+2023-10-31 21:54:36,651: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1607/6808]	Time  0.202 ( 0.218)	Data  0.001 ( 0.003)	Loss 3.0122e+00 (1.2978e+01)
+2023-10-31 21:54:47,460: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1657/6808]	Time  0.210 ( 0.218)	Data  0.001 ( 0.003)	Loss 2.6568e+00 (1.2670e+01)
+2023-10-31 21:54:58,360: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1707/6808]	Time  0.229 ( 0.218)	Data  0.014 ( 0.003)	Loss 2.0345e+00 (1.2376e+01)
+2023-10-31 21:55:08,885: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1757/6808]	Time  0.200 ( 0.218)	Data  0.002 ( 0.003)	Loss 1.9655e+00 (1.2092e+01)
+2023-10-31 21:55:17,729: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1807/6808]	Time  0.183 ( 0.217)	Data  0.001 ( 0.002)	Loss 2.8853e+00 (1.1824e+01)
+2023-10-31 21:55:27,013: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1857/6808]	Time  0.237 ( 0.216)	Data  0.003 ( 0.002)	Loss 2.6766e+00 (1.1569e+01)
+2023-10-31 21:55:37,799: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1907/6808]	Time  0.219 ( 0.216)	Data  0.000 ( 0.002)	Loss 1.9973e+00 (1.1323e+01)
+2023-10-31 21:55:48,752: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][1957/6808]	Time  0.226 ( 0.216)	Data  0.001 ( 0.002)	Loss 2.4018e+00 (1.1092e+01)
+2023-10-31 21:55:59,605: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2007/6808]	Time  0.216 ( 0.216)	Data  0.001 ( 0.002)	Loss 2.5972e+00 (1.0871e+01)
+2023-10-31 21:56:10,406: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2057/6808]	Time  0.222 ( 0.216)	Data  0.001 ( 0.002)	Loss 1.5732e+00 (1.0660e+01)
+2023-10-31 21:56:21,272: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2107/6808]	Time  0.204 ( 0.216)	Data  0.000 ( 0.002)	Loss 2.1451e+00 (1.0455e+01)
+2023-10-31 21:56:32,097: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2157/6808]	Time  0.198 ( 0.216)	Data  0.001 ( 0.002)	Loss 1.7917e+00 (1.0258e+01)
+2023-10-31 21:56:42,810: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2207/6808]	Time  0.207 ( 0.216)	Data  0.001 ( 0.002)	Loss 2.7491e+00 (1.0075e+01)
+2023-10-31 21:56:53,586: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2257/6808]	Time  0.213 ( 0.216)	Data  0.001 ( 0.002)	Loss 1.6001e+00 (9.8985e+00)
+2023-10-31 21:57:04,401: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2307/6808]	Time  0.213 ( 0.216)	Data  0.001 ( 0.002)	Loss 2.3380e+00 (9.7263e+00)
+2023-10-31 21:57:15,173: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2357/6808]	Time  0.204 ( 0.216)	Data  0.001 ( 0.002)	Loss 2.2526e+00 (9.5637e+00)
+2023-10-31 21:57:26,098: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2407/6808]	Time  0.214 ( 0.216)	Data  0.001 ( 0.002)	Loss 2.0282e+00 (9.4048e+00)
+2023-10-31 21:57:36,967: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2457/6808]	Time  0.216 ( 0.216)	Data  0.001 ( 0.002)	Loss 2.1725e+00 (9.2516e+00)
+2023-10-31 21:57:47,715: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2507/6808]	Time  0.224 ( 0.216)	Data  0.001 ( 0.002)	Loss 1.8249e+00 (9.1067e+00)
+2023-10-31 21:57:58,418: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2557/6808]	Time  0.205 ( 0.216)	Data  0.001 ( 0.002)	Loss 2.2992e+00 (8.9655e+00)
+2023-10-31 21:58:09,128: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2607/6808]	Time  0.211 ( 0.216)	Data  0.001 ( 0.002)	Loss 1.7172e+00 (8.8274e+00)
+2023-10-31 21:58:19,890: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2657/6808]	Time  0.203 ( 0.216)	Data  0.001 ( 0.002)	Loss 2.1621e+00 (8.6954e+00)
+2023-10-31 21:58:30,668: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2707/6808]	Time  0.219 ( 0.216)	Data  0.001 ( 0.002)	Loss 1.9870e+00 (8.5682e+00)
+2023-10-31 21:58:41,499: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2757/6808]	Time  0.218 ( 0.216)	Data  0.001 ( 0.002)	Loss 1.8474e+00 (8.4464e+00)
+2023-10-31 21:58:52,329: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2807/6808]	Time  0.222 ( 0.216)	Data  0.001 ( 0.002)	Loss 1.6705e+00 (8.3276e+00)
+2023-10-31 21:59:03,122: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2857/6808]	Time  0.212 ( 0.216)	Data  0.001 ( 0.002)	Loss 1.6951e+00 (8.2122e+00)
+2023-10-31 21:59:14,157: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2907/6808]	Time  0.266 ( 0.216)	Data  0.001 ( 0.002)	Loss 1.5674e+00 (8.1027e+00)
+2023-10-31 21:59:25,234: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][2957/6808]	Time  0.202 ( 0.216)	Data  0.001 ( 0.002)	Loss 2.3862e+00 (7.9949e+00)
+2023-10-31 21:59:36,099: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][3007/6808]	Time  0.201 ( 0.216)	Data  0.001 ( 0.002)	Loss 1.9145e+00 (7.8903e+00)
+2023-10-31 21:59:46,921: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][3057/6808]	Time  0.213 ( 0.216)	Data  0.006 ( 0.002)	Loss 1.7185e+00 (7.7908e+00)
+2023-10-31 21:59:58,567: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][3107/6808]	Time  0.221 ( 0.216)	Data  0.001 ( 0.002)	Loss 1.7067e+00 (7.6925e+00)
+2023-10-31 22:00:09,829: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][3157/6808]	Time  0.223 ( 0.216)	Data  0.007 ( 0.002)	Loss 1.8965e+00 (7.5977e+00)
+2023-10-31 22:00:21,186: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][3207/6808]	Time  0.215 ( 0.217)	Data  0.001 ( 0.002)	Loss 1.6901e+00 (7.5064e+00)
+2023-10-31 22:00:32,641: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [0/300][3257/6808]	Time  0.227 ( 0.217)	Data  0.012 ( 0.002)	Loss 1.5838e+00 (7.4162e+00)
