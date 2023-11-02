@@ -212,63 +212,74 @@ def main_worker(gpu_idx, configs):
 
     dataset = kitti_dataset.KittiDataset(configs, mode='val', lidar_aug=lidar_aug, hflip_prob=0., num_samples=configs.num_samples)
 
+    if os.path.exists( os.path.join( configs.checkpoints_dir , "Rosbag_Hyundai_Dataset_Ground_Truth_DF.csv" ) ) == True :
 
-    # Make ground truth Rosbag Hyundai Dataset
-    if Rosbag_Hyundai_Dataset_Ground_Truth_DF == None :
+        Rosbag_Hyundai_Dataset_Ground_Truth_DF = pd.read_csv( os.path.join( configs.checkpoints_dir , "Rosbag_Hyundai_Dataset_Ground_Truth_DF.csv" )  )
+
+        print( "Loading Rosbag Hyundai Dataset Ground Truth DF from {}....".format( os.path.join( configs.checkpoints_dir  , "Rosbag_Hyundai_Dataset_Ground_Truth_DF.csv" )  ) )
+
+        print( "-------------------------------------------------------------" )
+
+    else :
+
+        # Make ground truth Rosbag Hyundai Dataset
+        if Rosbag_Hyundai_Dataset_Ground_Truth_DF is None :
+                
+            SFA_3D_Ground_Truth_Bounding_Box_Dictionary = { "Image_Path" : [] ,
+                                            "Confidence_Score_Prediction" : [] ,
+                                            "BEV_Corner" : [] }
+
+            print( "Creating Ground Truth SFA 3D Rosbag Hyundai Dataset..." )
+
+            #configs.no_cuda= True
             
-        SFA_3D_Ground_Truth_Bounding_Box_Dictionary = { "Image_Path" : [] ,
-                                        "Confidence_Score_Prediction" : [] ,
-                                        "BEV_Corner" : [] }
+            #configs.device = "cpu"    
 
-        print( "Creating Ground Truth SFA 3D Rosbag Hyundai Dataset" )
+            for idx in range(len(dataset)):
+                bev_map, labels, img_rgb, img_path = dataset.draw_img_with_label(idx)
+                #print( 'Making Dataset SFA 3D Labelling Rosbag Data : ' + str( idx ))
+                #calib = Calibration(img_path.replace(".png", ".txt").replace("image_2", "calib"))
+                
 
-        #configs.no_cuda= True
-        
-        #configs.device = "cpu"    
-
-        for idx in range(len(dataset)):
-            bev_map, labels, img_rgb, img_path = dataset.draw_img_with_label(idx)
-            #print( 'Making Dataset SFA 3D Labelling Rosbag Data : ' + str( idx ))
-            #calib = Calibration(img_path.replace(".png", ".txt").replace("image_2", "calib"))
+                for box_idx, (cls_id, x, y, z, h, w, l, yaw) in enumerate(labels):
+                    # Draw rotated box
+                    yaw = -yaw
             
+                    y1 = int((x - cnf.boundary['minX']) / cnf.DISCRETIZATION)
+                    x1 = int((y - cnf.boundary['minY']) / cnf.DISCRETIZATION)
 
-            for box_idx, (cls_id, x, y, z, h, w, l, yaw) in enumerate(labels):
-                # Draw rotated box
-                yaw = -yaw
-        
-                y1 = int((x - cnf.boundary['minX']) / cnf.DISCRETIZATION)
-                x1 = int((y - cnf.boundary['minY']) / cnf.DISCRETIZATION)
+                    
+                    w1 = int(w / cnf.DISCRETIZATION)
+                    l1 = int(l / cnf.DISCRETIZATION)
 
+
+                    
+
+                    bev_corners = get_corners(x1, y1, w1, l1, yaw)
+                    
+                    bev_corners = bev_corners.astype( int )            
+
+                    
+                    SFA_3D_Ground_Truth_Bounding_Box_Dictionary[ "Image_Path" ].append( img_path )
+
+
+                    SFA_3D_Ground_Truth_Bounding_Box_Dictionary[ "Confidence_Score_Prediction" ].append( 100 )
+
+                    SFA_3D_Ground_Truth_Bounding_Box_Dictionary[ "BEV_Corner" ].append( [ bev_corners[ 0 ][ 0 ] ,
+                                                                                        bev_corners[ 0 ][ 1 ] ,
+                                                                                        bev_corners[ 1 ][ 0 ] ,
+                                                                                        bev_corners[ 1 ][ 1 ] ,
+                                                                                        bev_corners[ 2 ][ 0 ] ,
+                                                                                        bev_corners[ 2 ][ 1 ] ,
+                                                                                        bev_corners[ 3 ][ 0 ] ,
+                                                                                        bev_corners[ 3 ][ 1 ] ] 
+                                                                                        )
+                                                                                        
+
+            Rosbag_Hyundai_Dataset_Ground_Truth_DF = pd.DataFrame( SFA_3D_Ground_Truth_Bounding_Box_Dictionary )
+
+            export = Rosbag_Hyundai_Dataset_Ground_Truth_DF.to_csv( os.path.join( configs.checkpoints_dir , "Rosbag_Hyundai_Dataset_Ground_Truth_DF.csv" ) , index = False )
                 
-                w1 = int(w / cnf.DISCRETIZATION)
-                l1 = int(l / cnf.DISCRETIZATION)
-
-
-                
-
-                bev_corners = get_corners(x1, y1, w1, l1, yaw)
-                
-                bev_corners = bev_corners.astype( int )            
-
-                
-                SFA_3D_Ground_Truth_Bounding_Box_Dictionary[ "Image_Path" ].append( img_path )
-
-
-                SFA_3D_Ground_Truth_Bounding_Box_Dictionary[ "Confidence_Score_Prediction" ].append( 100 )
-
-                SFA_3D_Ground_Truth_Bounding_Box_Dictionary[ "BEV_Corner" ].append( [ bev_corners[ 0 ][ 0 ] ,
-                                                                                    bev_corners[ 0 ][ 1 ] ,
-                                                                                    bev_corners[ 1 ][ 0 ] ,
-                                                                                    bev_corners[ 1 ][ 1 ] ,
-                                                                                    bev_corners[ 2 ][ 0 ] ,
-                                                                                    bev_corners[ 2 ][ 1 ] ,
-                                                                                    bev_corners[ 3 ][ 0 ] ,
-                                                                                    bev_corners[ 3 ][ 1 ] ] 
-                                                                                    )
-                                                                                    
-
-        Rosbag_Hyundai_Dataset_Ground_Truth_DF = pd.DataFrame( SFA_3D_Ground_Truth_Bounding_Box_Dictionary )
-            
     for epoch in range(configs.start_epoch, configs.num_epochs + 1):
         if logger is not None:
             logger.info('{}'.format('*-' * 40))
@@ -406,7 +417,7 @@ def validate(val_dataloader, model, configs , number_epoch = 0 , ground_truth_da
                 reduced_loss = total_loss.data
             losses.update(to_python_float(reduced_loss), batch_size)
 
-            if ground_truth_dataset != None :
+            if ground_truth_dataset is not None :
                 # Evaluate MAP SFA 3D Model trains on all Rosbag Hyundai Dataset
 
                 outputs['hm_cen'] = _sigmoid(outputs['hm_cen'])
@@ -420,41 +431,49 @@ def validate(val_dataloader, model, configs , number_epoch = 0 , ground_truth_da
 
                 list_of_detections = detections.copy()
 
-                for LiDAR_Point_Detected in range( len( list_of_detections ) ) : 
+                try :
+
+                    for LiDAR_Point_Detected in range( len( list_of_detections ) ) : 
 
 
 
-                    detections = list_of_detections[ LiDAR_Point_Detected ]  # only first batch
+                        detections = list_of_detections[ LiDAR_Point_Detected ]  # only first batch
 
-                    img_path = metadatas['img_path'][ LiDAR_Point_Detected ]
+                        img_path = metadatas['img_path'][ LiDAR_Point_Detected ]
 
-                    for j in range(configs.num_classes):
-                        if len(detections[j]) > 0:
+                        for j in range(configs.num_classes):
+                            if len(detections[j]) > 0:
 
-                            i = 0
-                            for det in detections[j]:
+                                i = 0
+                                for det in detections[j]:
 
-                                i = i + 1
-                                # (scores-0:1, x-1:2, y-2:3, z-3:4, dim-4:7, yaw-7:8)
-                                _score, _x, _y, _z, _h, _w, _l, _yaw = det
-                                bev_corners = get_corners(_x, _y, _w, _l, _yaw)
+                                    i = i + 1
+                                    # (scores-0:1, x-1:2, y-2:3, z-3:4, dim-4:7, yaw-7:8)
+                                    _score, _x, _y, _z, _h, _w, _l, _yaw = det
+                                    bev_corners = get_corners(_x, _y, _w, _l, _yaw)
 
-                                SFA_3D_Prediction_Bounding_Box_Dictionary[ "Image_Path" ].append( img_path )
+                                    SFA_3D_Prediction_Bounding_Box_Dictionary[ "Image_Path" ].append( img_path )
 
-                                SFA_3D_Prediction_Bounding_Box_Dictionary[ "Confidence_Score_Prediction" ].append( float( _score ) )
+                                    SFA_3D_Prediction_Bounding_Box_Dictionary[ "Confidence_Score_Prediction" ].append( float( _score ) )
 
-                                SFA_3D_Prediction_Bounding_Box_Dictionary[ "BEV_Corner" ].append( [ bev_corners[ 0 ][ 0 ] ,
-                                                                                                    bev_corners[ 0 ][ 1 ] ,
-                                                                                                    bev_corners[ 1 ][ 0 ] ,
-                                                                                                    bev_corners[ 1 ][ 1 ] ,
-                                                                                                    bev_corners[ 2 ][ 0 ] ,
-                                                                                                    bev_corners[ 2 ][ 1 ] ,
-                                                                                                    bev_corners[ 3 ][ 0 ] ,
-                                                                                                    bev_corners[ 3 ][ 1 ] ] 
-                                                                                                    )                            
+                                    SFA_3D_Prediction_Bounding_Box_Dictionary[ "BEV_Corner" ].append( [ bev_corners[ 0 ][ 0 ] ,
+                                                                                                        bev_corners[ 0 ][ 1 ] ,
+                                                                                                        bev_corners[ 1 ][ 0 ] ,
+                                                                                                        bev_corners[ 1 ][ 1 ] ,
+                                                                                                        bev_corners[ 2 ][ 0 ] ,
+                                                                                                        bev_corners[ 2 ][ 1 ] ,
+                                                                                                        bev_corners[ 3 ][ 0 ] ,
+                                                                                                        bev_corners[ 3 ][ 1 ] ] 
+                                                                                                        )                            
                 
+                except Exception as e :
+
+                    continue
+
+    NUMBER_EPOCH_EVALUATION_SFA_3D = 20
+
     try :
-        if ground_truth_dataset != None :
+        if ( ( ground_truth_dataset is not None ) and ( number_epoch > 0 ) and ( number_epoch % NUMBER_EPOCH_EVALUATION_SFA_3D == 0 ) ) :
             # Evaluating MAP of SFA 3D Model trains on All Rosbag Hyundai Dataset
             
             SFA_3D_Prediction_Bounding_Box_Dataset = pd.DataFrame( SFA_3D_Prediction_Bounding_Box_Dictionary )

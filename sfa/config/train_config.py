@@ -115,7 +115,12 @@ def parse_train_configs():
     parser.add_argument('--dataset_dir', type=str, default=None,
                         help='The Dataset of SFA 3D Dataset')
     parser.add_argument('--is_Training_SFA_3D_Model_Without_Color', type=bool, default=False,
-                        help='is Training SFA 3D Model Without Color')                      
+                        help='is Training SFA 3D Model Without Color')           
+
+    ###################################################################
+    ## Configuration for evaluation SFA 3D trains on Rosbag Hyundai Dataset
+
+    parser.add_argument('--peak_thresh', type=float, default=0.2)           
                         
     configs = edict(vars(parser.parse_args()))
 
@@ -124,6 +129,8 @@ def parse_train_configs():
     ####################################################################
     configs.device = torch.device('cpu' if configs.no_cuda else 'cuda')
     configs.ngpus_per_node = torch.cuda.device_count()
+
+    
 
     configs.pin_memory = True
     configs.input_size = ( SFA_3D_INPUT_SIZE, SFA_3D_INPUT_SIZE )
