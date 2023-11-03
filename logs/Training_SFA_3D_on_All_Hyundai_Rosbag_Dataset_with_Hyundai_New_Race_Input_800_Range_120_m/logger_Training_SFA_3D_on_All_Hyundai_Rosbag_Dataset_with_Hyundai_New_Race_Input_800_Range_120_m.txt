@@ -22190,3 +22190,7 @@ Train - Epoch: [73/300][5323/6808]	Time  0.207 ( 0.217)	Data  0.001 ( 0.003)	Los
 Train - Epoch: [73/300][5373/6808]	Time  0.212 ( 0.218)	Data  0.001 ( 0.003)	Loss 1.2393e-01 (2.8418e-01)
 2023-11-03 14:18:20,133: logger.py - info(), at Line 51:INFO:
 Train - Epoch: [73/300][5423/6808]	Time  0.217 ( 0.218)	Data  0.001 ( 0.003)	Loss 2.6084e-01 (2.8425e-01)
+2023-11-03 14:18:31,271: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [73/300][5473/6808]	Time  0.215 ( 0.218)	Data  0.001 ( 0.003)	Loss 4.2832e-01 (2.8420e-01)
+2023-11-03 14:18:42,378: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [73/300][5523/6808]	Time  0.233 ( 0.218)	Data  0.014 ( 0.003)	Loss 1.5779e-01 (2.8405e-01)
