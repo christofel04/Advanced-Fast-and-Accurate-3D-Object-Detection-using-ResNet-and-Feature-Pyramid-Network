@@ -8602,3 +8602,43 @@ Train - Epoch: [25/300][ 293/8369]	Time  0.249 ( 0.239)	Data  0.032 ( 0.005)	Los
 Train - Epoch: [25/300][ 343/8369]	Time  0.214 ( 0.237)	Data  0.002 ( 0.005)	Loss 7.8412e-01 (8.0028e-01)
 2023-11-06 15:28:22,188: logger.py - info(), at Line 51:INFO:
 Train - Epoch: [25/300][ 393/8369]	Time  0.239 ( 0.236)	Data  0.001 ( 0.004)	Loss 6.7242e-01 (7.9903e-01)
+2023-11-06 15:28:33,528: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [25/300][ 443/8369]	Time  0.219 ( 0.235)	Data  0.001 ( 0.004)	Loss 4.8443e-01 (7.9754e-01)
+2023-11-06 15:28:44,711: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [25/300][ 493/8369]	Time  0.233 ( 0.234)	Data  0.002 ( 0.004)	Loss 7.7485e-01 (7.9659e-01)
+2023-11-06 15:28:55,849: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [25/300][ 543/8369]	Time  0.223 ( 0.233)	Data  0.001 ( 0.004)	Loss 9.1998e-01 (7.9833e-01)
+2023-11-06 15:29:07,325: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [25/300][ 593/8369]	Time  0.213 ( 0.232)	Data  0.001 ( 0.003)	Loss 5.6851e-01 (7.9647e-01)
+2023-11-06 15:29:19,329: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [25/300][ 643/8369]	Time  0.234 ( 0.233)	Data  0.001 ( 0.003)	Loss 9.0220e-01 (7.9673e-01)
+2023-11-06 15:29:31,269: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [25/300][ 693/8369]	Time  0.221 ( 0.233)	Data  0.001 ( 0.003)	Loss 7.8665e-01 (7.9780e-01)
+2023-11-06 15:29:42,880: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [25/300][ 743/8369]	Time  0.227 ( 0.233)	Data  0.001 ( 0.003)	Loss 8.6739e-01 (8.0066e-01)
+2023-11-06 15:29:54,225: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [25/300][ 793/8369]	Time  0.224 ( 0.233)	Data  0.003 ( 0.003)	Loss 8.2838e-01 (8.0322e-01)
+2023-11-06 15:30:05,442: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [25/300][ 843/8369]	Time  0.217 ( 0.232)	Data  0.001 ( 0.003)	Loss 5.6445e-01 (8.0295e-01)
+2023-11-06 15:30:16,430: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [25/300][ 893/8369]	Time  0.213 ( 0.232)	Data  0.001 ( 0.003)	Loss 7.0802e-01 (8.0323e-01)
+2023-11-06 15:30:27,505: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [25/300][ 943/8369]	Time  0.266 ( 0.231)	Data  0.027 ( 0.003)	Loss 6.5682e-01 (8.0202e-01)
+2023-11-06 15:30:38,601: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [25/300][ 993/8369]	Time  0.232 ( 0.231)	Data  0.001 ( 0.003)	Loss 8.2422e-01 (8.0235e-01)
+2023-11-06 15:30:49,736: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [25/300][1043/8369]	Time  0.204 ( 0.230)	Data  0.000 ( 0.003)	Loss 8.7586e-01 (8.0257e-01)
+2023-11-06 15:31:01,293: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [25/300][1093/8369]	Time  0.265 ( 0.230)	Data  0.025 ( 0.003)	Loss 9.9658e-01 (8.0303e-01)
+2023-11-06 15:31:12,468: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [25/300][1143/8369]	Time  0.313 ( 0.230)	Data  0.001 ( 0.003)	Loss 6.4983e-01 (8.0348e-01)
+2023-11-06 15:31:23,489: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [25/300][1193/8369]	Time  0.216 ( 0.230)	Data  0.001 ( 0.003)	Loss 1.3864e+00 (8.0574e-01)
+2023-11-06 15:31:34,483: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [25/300][1243/8369]	Time  0.216 ( 0.229)	Data  0.001 ( 0.003)	Loss 6.5816e-01 (8.0681e-01)
+2023-11-06 15:31:45,686: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [25/300][1293/8369]	Time  0.230 ( 0.229)	Data  0.001 ( 0.003)	Loss 9.9693e-01 (8.0819e-01)
+2023-11-06 15:31:56,865: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [25/300][1343/8369]	Time  0.208 ( 0.229)	Data  0.001 ( 0.003)	Loss 8.2184e-01 (8.0853e-01)
+2023-11-06 15:32:08,644: logger.py - info(), at Line 51:INFO:
+Train - Epoch: [25/300][1393/8369]	Time  0.211 ( 0.229)	Data  0.001 ( 0.003)	Loss 1.0730e+00 (8.0773e-01)
