@@ -26,6 +26,8 @@ while not src_dir.endswith("sfa"):
 if src_dir not in sys.path:
     sys.path.append(src_dir)
 
+DEFAULT_CALIBRATION_PATH_FILE = "./000000.txt"
+
 from data_process.kitti_data_utils import gen_hm_radius, compute_radius, Calibration, get_filtered_lidar
 from data_process.kitti_bev_utils import makeBEVMap, drawRotatedBox, get_corners
 from data_process import transformation
@@ -136,7 +138,11 @@ class KittiDataset(Dataset):
     def get_calib(self, idx):
         calib_file = os.path.join(self.calib_dir, '{:06d}.txt'.format(idx))
         # assert os.path.isfile(calib_file)
-        return Calibration(calib_file)
+        try :
+                calibration_output = Calibration(calib_file)
+                return Calibration(calib_file)
+        except :
+                return Calibration( DEFAULT_CALIBRATION_PATH_FILE )
 
     def get_lidar(self, idx):
         lidar_file = os.path.join(self.lidar_dir, '{:06d}.bin'.format(idx))
@@ -453,7 +459,7 @@ if __name__ == '__main__':
         import os
 
         #image_folder = '.'
-        video_name = 'Output_SFA_3D_Dataset_Video.mp4'
+        video_name = str( os.path.join( configs.checkpoints_dir , 'Output_SFA_3D_Dataset_Video_Dataset_{}.mp4'.format( str(configs.dataset_dir).split( "/" )[ - 2 ].strip()  ) ) )
 
         #frame = images[ 0 ] #cv2.imread(os.path.join(image_folder, images[0]))
 
@@ -465,15 +471,8 @@ if __name__ == '__main__':
 
         video = cv2.VideoWriter(video_name, fourcc , 10 , (width,height))
 
-        #for image in images:
-        #    video.write(cv2.imread(os.path.join(image_folder, image)))
-
-        #cv2.destroyAllWindows()
-        #video.release()
-
-        #images = [img for img in os.listdir(image_folder) if img.endswith(".png")]
-
-        print( "Making Video SFA 3D Dataset..." )
+        
+        print( "Making Video SFA 3D Dataset in File {}...".format( video_name ))
 
         dataset = KittiDataset(configs, mode='train', lidar_aug=lidar_aug, hflip_prob=0., num_samples=configs.num_samples)
 
@@ -483,104 +482,44 @@ if __name__ == '__main__':
 
         #Name_File_of_Prediction_and_Ground_Truth_Output_Files = "Output_" + "Ground_Truth" + "Ground_Truth_Dataset_SFA_3D_from_Bag.txt"
 
-        """
-        if os.path.exists( Name_File_of_Prediction_and_Ground_Truth_Output_Files ):
-
-            os.system( "sudo rm " + str( Name_File_of_Prediction_and_Ground_Truth_Output_Files ))
-
-            os.system( "sudo touch " + str( Name_File_of_Prediction_and_Ground_Truth_Output_Files ) )
-
-        f = open( "Output_Test_True_Detection_Dataset_SFA_3D_from_Bag.txt" , "a+" )
-
-        """#print( 'meta', metadatas )
 
         for idx in range(len(dataset)):
             bev_map, labels, img_rgb, img_path = dataset.draw_img_with_label(idx)
             #print( 'Making Dataset SFA 3D Labelling Rosbag Data : ' + str( idx ))
-            calib = Calibration(img_path.replace(".png", ".txt").replace("image_2", "calib"))
+            calib = Calibration( DEFAULT_CALIBRATION_PATH_FILE )#Calibration(img_path.replace(".png", ".txt").replace("image_2", "calib"))
             bev_map = (bev_map.transpose(1, 2, 0) * 255).astype(np.uint8)
             bev_map = cv2.resize(bev_map, (cnf.BEV_HEIGHT, cnf.BEV_WIDTH))
 
             for box_idx, (cls_id, x, y, z, h, w, l, yaw) in enumerate(labels):
                 # Draw rotated box
                 yaw = -yaw
-                #print( "Length of the Vehicle form Autonomous Vehicle is : " + str( x ))
-                #print( "Height of the Vehicle from Autonomous Vehicle is : " + str( y ))
-                #y = -y
+                
                 y1 = int((x - cnf.boundary['minX']) / cnf.DISCRETIZATION)
                 x1 = int((y - cnf.boundary['minY']) / cnf.DISCRETIZATION)
-                #x1 = x1 + cnf.BEV_WIDTH/2   
-
-                #print( "Image Coordinate of Vehicle in Bird Eye View Image is : " + str( x1 ) )
-
-                #print( "Image Coordinate Y of Vehicle in Bird Eye View Image is : " + str( y1 ) )
+                
 
                 
                 w1 = int(w / cnf.DISCRETIZATION)
                 l1 = int(l / cnf.DISCRETIZATION)
 
 
-                #print(cnf.boundary['minX'])
-                #print(cnf.boundary['minY'])
-                #print(cnf.DISCRETIZATION)
-                #print(w1)
-                #print(l1)
-                #print(w)
-                #print(l)
+       
 
                 bev_corners = get_corners(x, y, w, l, yaw)
 
-                #bev_corners = bev_corners + 604
-
-                #f.write( "{} {} {} {} {}\n".format( img_path  ,  bev_corners[0][0] , bev_corners[ 0 ][ 1 ] , bev_corners[ 1 ][ 0 ] , bev_corners[ 1 ][ 1 ]) )
-
+               
                 drawRotatedBox(img_path, bev_map, x1, y1, w1, l1, yaw, cnf.colors[int(cls_id)] , writing_mode="Ground_Truth")
 
-            #f.close()
-            # Rotate the bev_map
-            
+           
             bev_map = cv2.rotate(bev_map, cv2.ROTATE_180)
             
-            #list_of_SFA_3D_Dataset_Image_Ground_Truth.append( bev_map )
 
             video.write( bev_map )
 
             if idx >= 10000 :
 
                 break
-            """
-            cv2.imshow('bev_map', bev_map)
-            """
-            '''
-            labels[:, 1:] = lidar_to_camera_box(labels[:, 1:], calib.V2C, calib.R0, calib.P2)
-            img_rgb = cv2.cvtColor(img_rgb, cv2.COLOR_RGB2BGR)
-            img_rgb = show_rgb_image_with_boxes(img_rgb, labels, calib)
-
-            out_img = merge_rgb_to_bev(img_rgb, bev_map, output_width=configs.output_width)
-            cv2.imshow('bev_map', out_img)
-            '''
-            #if cv2.waitKey(0) & 0xff == 27:
-            #    break
-        
-        """
-        import cv2
-        import os
-
-        image_folder = '.'
-        video_name = 'Output_SFA_3D_Dataset_Video.mp4'
-
-        #images = [img for img in os.listdir(image_folder) if img.endswith(".png")]
-        images = list_of_SFA_3D_Dataset_Image_Ground_Truth
-        frame = images[ 0 ] #cv2.imread(os.path.join(image_folder, images[0]))
-        height, width, layers = frame.shape
-
-        fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-
-        video = cv2.VideoWriter(video_name, fourcc , 4 , (width,height))
-
-        for image in images:
-            video.write(cv2.imread(os.path.join(image_folder, image)))
-        """
+            
         cv2.destroyAllWindows()
         video.release()
 
