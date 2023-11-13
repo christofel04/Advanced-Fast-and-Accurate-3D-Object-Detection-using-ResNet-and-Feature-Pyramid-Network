@@ -1,4 +1,4 @@
-# Super Fast and Accurate 3D Object Detection based on 3D LiDAR Point Clouds (SFA3D)
+# Fast and Accurate 3D Object Detection using ResNet and Feature Pyramid Network
 
 [![python-image]][python-url]
 [![pytorch-image]][pytorch-url]
